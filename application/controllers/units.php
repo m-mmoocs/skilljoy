@@ -11,8 +11,12 @@ class Units extends MY_Controller {
 
     public function show($id) {
         $this->load->model('units_m');
+        if(!$unit=$this->units_m->get_unit_with_id($id)){
+            header('Location:'.base_url());
+            exit();
+        }
         $page = new Page('unit');
-        $page->Data('unit', $this->units_m->get_unit_with_id($id));
+        $page->Data('unit', $unit);
         $page->show();
     }
 

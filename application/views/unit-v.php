@@ -3,7 +3,7 @@
 ?>
 
 <h2 class="unit-title"><?php echo ucwords($unit->title); ?></h2>
-<p  class="unit-description"><?php echo ucfirst($unit->description); ?></p>
+<p  class="unit-description"><?php echo nl2br(ucfirst($unit->description)); ?></p>
 <hr>
 <div class="unit-materials">
     
