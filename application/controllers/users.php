@@ -25,7 +25,8 @@ class Users extends MY_Controller{
                 // get user info
                 $user_profile = $this->fbconnect->api('/me','GET');
                 $this->user->login_fb($user_profile);
-                header('Location:'.base_url());
+                $redirect = $this->session->userdata('last_page')?$this->session->userdata('last_page'):base_url();
+                header('Location:'.$redirect);
                 exit();
             }else{
                 // handle error
@@ -39,7 +40,8 @@ class Users extends MY_Controller{
                 // get user info	
                 $user_profile = $this->gconnect->oauth2->userinfo->get();
                 $this->user->login_g($user_profile);
-                header('Location:'.base_url());
+                $redirect = $this->session->userdata('last_page')?$this->session->userdata('last_page'):base_url();
+                header('Location:'.$redirect);
                 exit();
             }else{
                 // handle error
