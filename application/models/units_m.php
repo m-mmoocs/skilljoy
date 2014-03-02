@@ -27,6 +27,7 @@ class Units_m extends MY_Model{
                 
                 $this->load->model('questions_m');
                 $unit->questions = $this->questions_m->get_question_with_unit_id($unit->id);
+                $unit->answers = $this->questions_m->get_answer_with_unit_id($unit->id);
                 return $unit;
             }
             else return FALSE;

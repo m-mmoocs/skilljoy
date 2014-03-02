@@ -51,10 +51,20 @@
 
 <p>Have a question? Ask here -> <input type ="text" name="question"> </p><br />
 <?php
-        echo '<p>Posted Questions</p>';
+        echo '<p>Posted Questions</p><br />';
         foreach($unit->questions as $quest)
         {
+            //$this->smrke->Debug($unit);
             echo $quest->question . ' (by '.$quest->user_name.')<br />';
+            
+            foreach($unit->answers as $ans)
+            {
+                if($ans->question_id == $quest->id)
+                    echo 'A: ' . $ans->answers . $ans->user_name .'<br/>';
+                
+            }
+            echo '<br />';
+            echo '<p>Enter your answer here: <input type ="text" name="answer"  ></p><br />'; 
         }
 ?>
 </div>
