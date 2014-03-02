@@ -19,14 +19,14 @@ class Questions_m extends MY_Model{
             $sql = "SELECT * FROM questions WHERE unit_id = ?";
             //$sql = $sql = "SELECT * FROM answers WHERE question_id = 1";
             $q = $this->db->query($sql,$id);
-            
+            if($q->num_rows >= 1){
                 $q = $q->result();
                 $q2 = $q[0];
                 $this->load->model('answers_m');
                 $q2->ans = $this->answers_m->get_answer_with_id($q2->id);
                 return $q2->ans;
             
-            
+            }
         }
         
 }

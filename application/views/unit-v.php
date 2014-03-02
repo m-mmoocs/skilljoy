@@ -60,7 +60,7 @@
             foreach($unit->answers as $ans)
             {
                 if($ans->question_id == $quest->id)
-                    echo 'A: ' . $ans->answers . $ans->user_name .'<br/>';
+                    echo 'A: ' . $ans->answers . ' (by '.$ans->user_name .')<br/>';
                 
             }
             echo '<br />';
