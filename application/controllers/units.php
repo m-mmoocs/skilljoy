@@ -14,6 +14,7 @@ class Units extends MY_Controller {
         $page = new Page('unit');
         $page->Data('unit', $this->units_m->get_unit_with_id($id));
         $page->show();
+        
     }
 
     public function save_unit() {

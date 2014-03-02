@@ -48,4 +48,13 @@
                 echo ' </a><br /><br />';
                 }
      ?> 
+
+<p>Have a question? Ask here -> <input type ="text" name="question"> </p><br />
+<?php
+        echo '<p>Posted Questions</p>';
+        foreach($unit->questions as $quest)
+        {
+            echo $quest->question . ' (by '.$quest->user_name.')<br />';
+        }
+?>
 </div>
