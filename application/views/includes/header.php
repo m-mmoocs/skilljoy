@@ -5,7 +5,7 @@
     <a href="<?php echo base_url('users/logout'); ?>">Logout</a>
 <?php else: ?>
     <?php if($p!=='login'): ?>
-    <a id="login-button" href="<?php echo base_url('users/login'); ?>">Login</a>
+<!--    <a id="login-button" href="<?php echo base_url('users/login'); ?>">Login</a>-->
     <div id="login-box">
         <?php $this->load->view('includes/header_login'); ?>
     </div>
