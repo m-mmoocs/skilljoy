@@ -38,19 +38,22 @@ class Units_m extends MY_Model{
             $unit_id = $this->add_unit($unit);
             if (isset($arr['new_subject']) && strlen($arr['new_subject']) > 3)      // check that a new subject was entered
             {                                                                       // (to combat empty subject names showing up)
-                $subject = array('name' => $arr['new_subject']);                        // format the new subject
-                $subject_id = $this->subjects_m->add_subject($subject);
-                if (count($arr['subjects']) > 0)                                    // check that there is an array 'subjects'
-                {                                                                   
-                    array_push($arr['subjects'], $subject_id);          // create a new subject entry into subject table
-                    foreach($arr['subjects'] as $subject_id){                               // for each subject related to the unit
-                        $this->subjects_m->add_subject_tags($unit_id, $subject_id);         // create a relation in units_subject table
-                    }
-                }
-                else
+                $subject = array('name' => $arr['new_subject']);                    // format the new subject
+                $subject_id = $this->subjects_m->add_subject($subject);             // add the new subject to subjects table
+            }
+            if (count($arr['subjects']) > 0)                                        // check that there is an array 'subjects'
+            {                                                                   
+                if (isset($subject_id))                                             // if a new subject was created
                 {
-                    $this->subjects_m->add_subject_tags($unit_id, $subject_id);
+                    array_push($arr['subjects'], $subject_id);                      // then add the new subject to the array of subjects selected
                 }
+                foreach($arr['subjects'] as $subject_id){                           // for each subject related to the unit
+                    $this->subjects_m->add_subject_tags($unit_id, $subject_id);     // create a relation in units_subject table
+                }
+            }
+            else                                                                    // otherwise, no other subjects have been selected
+            {
+                $this->subjects_m->add_subject_tags($unit_id, $subject_id);         // just create a relation with the new subject
             }
             foreach($arr['materials'] as $material){
                 if( strlen($material['content']) > 5 ){ // string length check is needed or it tries to load content of empty field
