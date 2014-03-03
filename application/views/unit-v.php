@@ -4,6 +4,24 @@
 
 <h2 class="unit-title"><?php echo ucwords($unit->title); ?></h2>
 <p  class="unit-description"><?php echo nl2br(ucfirst($unit->description)); ?></p>
+
+<div class="subject_tags">
+<hr>
+<h3>Tags:</h3>
+<?php
+if (!empty($subjects))
+{
+    foreach($subjects as $sub)
+    {
+        echo '<a href="'.base_url('subjects/show/'.$sub->id).'">'.$sub->name.'</a>  ';
+    }
+}
+else
+{
+    echo 'This unit has not been tagged to a subject.';
+}
+?>
+</div>
 <hr>
 <div class="unit-materials">
     
@@ -26,7 +44,7 @@
                 echo '<br /><br />';
     }    
     ?>
-    
+ 
 <!-- Show all the secondary materials -->
     <?php   
             foreach($unit->secondary_material as $s){
@@ -49,3 +67,4 @@
                 }
      ?> 
 </div>
+

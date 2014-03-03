@@ -36,6 +36,39 @@
         
     </table>
     <br><br>
+    
+    <h3>Subjects related to this unit: (Select all that apply)</h3>
+    <?php if (count($subjects) > 0) : ?>
+    <table cellspacing="10">
+        <tr>
+            <?php 
+            $ctr = 0;
+            foreach ($subjects as $s)
+            {
+                echo '<td><label><input type="checkbox" name="subjects[]" value = "'.$s->id. '"';
+                if (isset($_POST['subjects']))
+                {
+                if (in_array($s->id, $_POST['subjects']))
+                {
+                    echo ' checked ';
+                }
+                }
+                echo '>'.$s->name.'</label></td>';
+                $ctr++;
+                if ($ctr == 4)
+                {
+                    echo '</tr><tr>';
+                    $ctr = 0;
+                }
+            }
+            ?>
+        </tr>    
+    </table>
+    <?php else : ?>
+    <p>There are no subjects in in the database.</p>
+    <?php endif; ?>
+    <label for="new_subject"> Suggest a new subject : <input type="text" name="new_subject" 
+           value="<?php if (isset($_POST['new_subject'])) echo ($_POST['new_subject']); ?>"></label>
+    <br><br>
     <input type="submit" name="add_unit" value="Save">
-
 </form>

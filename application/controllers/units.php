@@ -11,11 +11,16 @@ class Units extends MY_Controller {
 
     public function show($id) {
         $this->load->model('units_m');
+        $this->load->model('subjects_m');
         if(!$unit=$this->units_m->get_unit_with_id($id)){
             header('Location:'.base_url());
             exit();
         }
         $page = new Page('unit');
+        if ($subjects = $this->subjects_m->get_subjects_for_unit($unit->id))
+        {   // ensures there are returned rows before sending to page
+            $page->Data('subjects', $subjects);
+        }
         $page->Data('unit', $unit);
         $page->show();
     }
@@ -23,6 +28,7 @@ class Units extends MY_Controller {
     public function save_unit() {
         $this->load->model('units_m');
         $this->load->model('materials_m');
+        $this->load->model('subjects_m');
 
         if (!$this->user || $this->user->status() !== 'active') {
             header("Location:" . base_url());
@@ -40,6 +46,7 @@ class Units extends MY_Controller {
 
         $page = new Page('unit');
         $page->Data('content_types', $this->materials_m->get_content_types());
+        $page->Data('subjects', $this->subjects_m->get_all_subjects());
         $page->content('save_unit-v');
         $page->show();
     }
@@ -52,12 +59,18 @@ class Units extends MY_Controller {
         $result = $this->mui->material_check($_POST['materials'][0]['content']);
         $_POST['materials'][0]['content'] = $result['content'];
         $_POST['materials'][0]['content_type'] = $result['content_type'];
+        if (strlen($_POST['materials'][1]['content']) > 5)
+        {
         $result = $this->mui->material_check($_POST['materials'][1]['content']);
         $_POST['materials'][1]['content'] = $result['content'];
         $_POST['materials'][1]['content_type'] = $result['content_type'];
+        }
+        if (strlen($_POST['materials'][1]['content']) > 5)
+        {
         $result = $this->mui->material_check($_POST['materials'][2]['content']);
         $_POST['materials'][2]['content'] = $result['content'];
         $_POST['materials'][2]['content_type'] = $result['content_type'];
+        }
     }
 
     public function chk_form() {      // returns true/false
@@ -75,6 +88,7 @@ class Units extends MY_Controller {
         $this->form_validation->set_rules('title', 'Unit Title', 'required|trim|xss_clean');
         $this->form_validation->set_rules('description', 'Unit Title', 'trim|xss_clean');
         $this->form_validation->set_rules('materials[0][content]', 'Primary Material', 'required|xss_clean|is_valid_url|is_valid_content|is_real_url');
+        $this->form_validation->set_rules('new_subject', 'New Subject', 'trim|xss_clean');
         $this->form_validation->set_message('is_valid_url', 'Invalid URL format.');
         $this->form_validation->set_message('is_valid_content', 'Invalid Content. Must be video link or URL to PDF');
         $this->form_validation->set_message('is_real_url', 'URL is not accessible.');
