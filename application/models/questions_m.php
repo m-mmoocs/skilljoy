@@ -17,7 +17,6 @@ class Questions_m extends MY_Model{
         
         public function get_answer_with_unit_id($id){
             $sql = "SELECT * FROM questions WHERE unit_id = ?";
-            //$sql = $sql = "SELECT * FROM answers WHERE question_id = 1";
             $q = $this->db->query($sql,$id);
             if($q->num_rows >= 1){
                 $q = $q->result();
@@ -30,19 +29,21 @@ class Questions_m extends MY_Model{
         }
         
          public function add_questions($arr){
+             
             $args = array();
             $field_names = "";
             $values = "";
-            foreach($arr as $key => $value){
+            foreach($arr as $key => $value){ 
+               
                 $field_names .= $key.",";
                 $args[] = $value;
                 $values .= "?,";
             }
-  
-            $field_name .='user_name';
+           
+            $field_names .='user_name';
             $args[] =$this->user->Data('firstname');
             $values .= "?";
-            
+             
             $sql = "INSERT INTO questions ($field_names) VALUES ($values)";
      //       $sql= "INSERT INTO questions ('id', 'unit_id', 'question', 'user_name') VALUES (NULL, '5', '123', 'abc');";
             if($this->db->query($sql,$args)){

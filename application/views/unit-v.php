@@ -51,8 +51,8 @@
                 }
      ?> 
 
-<p>Have a question? Ask here -> <input type ="text" name="question"> <input type="submit" name="add_questions" value="Submit"> 
-    <input type="hidden" name="unit_id" value="<?php $unit->id ?>" >
+<p>Have a question? Ask here -> <input type="hidden" name="unit_id" value="<?php echo $unit->id; ?>">
+<input type ="text" name="question"> <input type="submit" name="add_questions" value="Submit"> 
 </p><br />
 <?php
         echo '<p>Posted Questions</p><br />';

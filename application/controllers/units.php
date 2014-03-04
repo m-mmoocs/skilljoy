@@ -11,6 +11,13 @@ class Units extends MY_Controller {
 
     public function show($id) {
         $this->load->model('units_m');
+        
+        if (isset($_POST['add_questions'])) {  // if user has clicked the submit button
+             $this->units_m->save_question($_POST);
+             header('Location:' . base_url());
+             exit();
+        }
+        
         $page = new Page('unit');
         $page->Data('unit', $this->units_m->get_unit_with_id($id));
         $page->show();
@@ -42,16 +49,7 @@ class Units extends MY_Controller {
         $page->show();
     }
 
-    public function save_question()
-    {
-        $this->load->model('units_m');
-        //**for adding question
-        if (isset($_POST['add_questions'])) {  // if user has clicked the submit button
-             $this->units_m->save_question($_POST);
-             header('Location:' . base_url());
-             exit();
-        } //**
-    }
+ 
     public function extract_id() {
         /* This function takes the POST data and extracts video IDs for vimeo
           and youtube videos along with the content_type, then reassigns them into
