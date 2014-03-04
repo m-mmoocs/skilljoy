@@ -1,12 +1,14 @@
 <?php 
 
 ?>
-
+<form action="" method="post">  
 <h2 class="unit-title"><?php echo ucwords($unit->title); ?></h2>
+ 
 <p  class="unit-description"><?php echo ucfirst($unit->description); ?></p>
 <hr>
+
 <div class="unit-materials">
-    
+ 
 <!-- only shows primary materials --> 
     <?php foreach($unit->primary_material as $p)
     {
@@ -49,7 +51,9 @@
                 }
      ?> 
 
-<p>Have a question? Ask here -> <input type ="text" name="question"> </p><br />
+<p>Have a question? Ask here -> <input type ="text" name="question"> <input type="submit" name="add_questions" value="Submit"> 
+    <input type="hidden" name="unit_id" value="<?php $unit->id ?>" >
+</p><br />
 <?php
         echo '<p>Posted Questions</p><br />';
         foreach($unit->questions as $quest)
@@ -64,7 +68,9 @@
                 
             }
             echo '<br />';
-            echo '<p>Enter your answer here: <input type ="text" name="answer"  ></p><br />'; 
+            echo '<p>Enter your answer here: <input type ="text" name="answers"  ></p><br />'; 
         }
+   //  $this->smrke->debug($this->user)  ;
 ?>
 </div>
+</form>

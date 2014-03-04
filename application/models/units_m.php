@@ -40,6 +40,7 @@ class Units_m extends MY_Model{
                 'title' => $arr['title'],
                 'description' => $arr['description'] );
             $unit_id = $this->add_unit($unit);
+            
             foreach($arr['materials'] as $material){
                 if( strlen($material['content']) > 5 ){ // string length check is needed or it tries to load content of empty field
                         $material = array(
@@ -52,6 +53,11 @@ class Units_m extends MY_Model{
             }
         } // end save_unit
         
+        public function save_question($arr){
+           // $this->smrke->Debug($arr);
+            $quest = array('unit_id' => $arr['unit_id'],'question'=> $arr['question']); //for adding question
+            $this->question_m->add_questions($quest); //for adding question
+        }
         public function add_unit($arr){
             $args = array();
             $field_names = "";

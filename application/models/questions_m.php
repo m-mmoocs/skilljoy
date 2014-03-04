@@ -29,5 +29,30 @@ class Questions_m extends MY_Model{
             }
         }
         
+         public function add_questions($arr){
+            $args = array();
+            $field_names = "";
+            $values = "";
+            foreach($arr as $key => $value){
+                $field_names .= $key.",";
+                $args[] = $value;
+                $values .= "?,";
+            }
+  
+            $field_name .='user_name';
+            $args[] =$this->user->Data('firstname');
+            $values .= "?";
+            
+            $sql = "INSERT INTO questions ($field_names) VALUES ($values)";
+     //       $sql= "INSERT INTO questions ('id', 'unit_id', 'question', 'user_name') VALUES (NULL, '5', '123', 'abc');";
+            if($this->db->query($sql,$args)){
+                $sql = "SELECT LAST_INSERT_ID() AS id FROM questions";
+                $q = $this->db->query($sql);
+                $q = $q->result();
+                return $q[0]->id;
+            }
+            else return FALSE;
+        }
+        
 }
 
