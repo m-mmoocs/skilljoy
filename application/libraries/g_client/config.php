@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 global $apiConfig;
 $apiConfig = array(
     // True if objects should be returned by the service classes.
@@ -22,15 +21,15 @@ $apiConfig = array(
     'use_objects' => false,
   
     // The application_name is included in the User-Agent HTTP header.
-    'application_name' => '',
+    'application_name' => 'Skilljoy',
 
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
-    'oauth2_client_id' => '',
-    'oauth2_client_secret' => '',
-    'oauth2_redirect_uri' => '',
+    'oauth2_client_id' => '556580795356-eu27kaa22q22fgmf3g7qqfkns5cev0s1.apps.googleusercontent.com',
+    'oauth2_client_secret' => 'Yu4bk2U77YDJL9MlJmzYUcc2',
+    'oauth2_redirect_uri' => 'http://localhost/skilljoy/users/g_login',
 
     // The developer key, you get this at https://code.google.com/apis/console
-    'developer_key' => '',
+    'developer_key' => 'AIzaSyBKMBFyPpOrtFaelZnsknU373eKRV1GbSw',
   
     // Site name to show in the Google's OAuth 1 authentication screen.
     'site_name' => 'www.example.org',
@@ -73,7 +72,13 @@ $apiConfig = array(
               'https://www.googleapis.com/auth/userinfo.email',
           )
       ),
-      'plus' => array('scope' => 'https://www.googleapis.com/auth/plus.login'),
+      'plus' => array('scope' => array(
+          'https://www.googleapis.com/auth/plus.login',
+          'https://www.googleapis.com/auth/plus.me',
+        'https://www.googleapis.com/auth/userinfo.email',
+        'https://www.googleapis.com/auth/plus.circles.read'
+          )
+        ),
       'siteVerification' => array('scope' => 'https://www.googleapis.com/auth/siteverification'),
       'tasks' => array('scope' => 'https://www.googleapis.com/auth/tasks'),
       'urlshortener' => array('scope' => 'https://www.googleapis.com/auth/urlshortener')
