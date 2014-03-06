@@ -3,8 +3,7 @@
 class Users extends MY_Controller{
 
 	public function index(){
-//            $friends = $this->fbconnect->get_friends_list();
-//            $this->smrke->debug($friends);
+            
 	}
         
         public function login(){
@@ -40,6 +39,10 @@ class Users extends MY_Controller{
                 $this->gconnect->my_authenticate($_GET['code']);
                 // get user info	
                 $user_profile = $this->gconnect->get_userinfo();
+                
+//                            $friends = $this->gconnect->get_friends_list();
+//                            
+//                            $this->smrke->debug($friends);
                 $this->user->login_g($user_profile);
                 $redirect = $this->session->userdata('last_page')?$this->session->userdata('last_page'):base_url();
                 header('Location:'.$redirect);
