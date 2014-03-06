@@ -3,12 +3,7 @@
 ?>
 
 <h2 class="unit-title"><?php echo ucwords($unit->title); ?></h2>
-<<<<<<< HEAD
- 
-<p  class="unit-description"><?php echo ucfirst($unit->description); ?></p>
-<hr>
 
-=======
 <p  class="unit-description"><?php echo nl2br(ucfirst($unit->description)); ?></p>
 
 <div class="subject_tags">
@@ -49,7 +44,6 @@ else
     <?php endif; ?>        
 </div>
 <br />
->>>>>>> origin/main
 <div class="unit-materials">
  
 <!-- only shows primary materials --> 
@@ -93,7 +87,6 @@ else
                 echo ' </a><br /><br />';
                 }
      ?> 
-<<<<<<< HEAD
 <?php
     if($this->user && $this->user->status()==='active')
     { ?>
@@ -131,7 +124,4 @@ else
     }
 ?>
 </div>
-=======
-</div>
 
->>>>>>> origin/main
