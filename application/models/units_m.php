@@ -24,6 +24,10 @@ class Units_m extends MY_Model{
                 $unit->materials = $this->materials_m->get_materials_with_unit_id($unit->id);
                 $unit->primary_material = $this->materials_m->get_primary_materials_with_unit_id($unit->id);
                 $unit->secondary_material = $this->materials_m->get_secondary_materials_with_unit_id($unit->id);
+                
+                $this->load->model('questions_m');
+                $unit->questions = $this->questions_m->get_question_with_unit_id($unit->id);
+                $unit->answers = $this->questions_m->get_answer_with_unit_id($unit->id);
                 return $unit;
             }
             else return FALSE;
@@ -36,6 +40,7 @@ class Units_m extends MY_Model{
                 'title' => $arr['title'],
                 'description' => $arr['description'] );
             $unit_id = $this->add_unit($unit);
+
             if (isset($arr['new_subject']) && strlen($arr['new_subject']) > 3)      // check that a new subject was entered
             {                                                                       // (to combat empty subject names showing up)
                 $subject = array('name' => $arr['new_subject']);                    // format the new subject
@@ -55,6 +60,7 @@ class Units_m extends MY_Model{
             {
                 $this->subjects_m->add_subject_tags($unit_id, $subject_id);         // just create a relation with the new subject
             }
+
             foreach($arr['materials'] as $material){
                 if( strlen($material['content']) > 5 ){ // string length check is needed or it tries to load content of empty field
                         $material = array(
@@ -66,6 +72,18 @@ class Units_m extends MY_Model{
                 }
             }
         } // end save_unit
+        
+        public function save_question($arr){
+            $this->load->model('questions_m');
+            $quest = array('unit_id' => $arr['unit_id'],'question'=> $arr['question']); //for adding question
+            $this->questions_m->add_questions($quest); //for adding question
+        }
+        
+        public function save_answers($arr){
+            $this->load->model('answers_m');
+            $quest = array('question_id' => $arr['question_id'],'answers'=> $arr['answers']); //for adding question
+            $this->answers_m->add_answers($quest); //for adding question
+        }
         
         public function add_unit($arr){
             $args = array();
