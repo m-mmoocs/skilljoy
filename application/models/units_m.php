@@ -40,9 +40,7 @@ class Units_m extends MY_Model{
                 'title' => $arr['title'],
                 'description' => $arr['description'] );
             $unit_id = $this->add_unit($unit);
-<<<<<<< HEAD
-            
-=======
+
             if (isset($arr['new_subject']) && strlen($arr['new_subject']) > 3)      // check that a new subject was entered
             {                                                                       // (to combat empty subject names showing up)
                 $subject = array('name' => $arr['new_subject']);                    // format the new subject
@@ -62,7 +60,7 @@ class Units_m extends MY_Model{
             {
                 $this->subjects_m->add_subject_tags($unit_id, $subject_id);         // just create a relation with the new subject
             }
->>>>>>> origin/main
+
             foreach($arr['materials'] as $material){
                 if( strlen($material['content']) > 5 ){ // string length check is needed or it tries to load content of empty field
                         $material = array(
