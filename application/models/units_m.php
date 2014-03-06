@@ -119,10 +119,10 @@ class Units_m extends MY_Model{
             {
                 $stats['has_rated'] = $this->user_has_rated_unit($id);  // then check if user has voted on this unit
             }
-            $stats['total_rates'] = $this->total_ratings($id);          // get the total times this unit has been voted on
+            $stats['total_rates'] = $this->total_ratings_for_unit($id);          // get the total times this unit has been voted on
             if ($stats['total_rates'] > 0)                  // avoids a divide by zero if unit has never been rated
             {                                               // then gets the percentage of positive votes versus total votes
-                $stats['percentage'] = round(($this->positive_ratings($id)/$this->total_ratings($id))*100);
+                $stats['percentage'] = round(($this->positive_ratings_for_unit($id)/$stats['total_rates'])*100);
             } else {
                 $stats['percentage'] = 0;                   // or set percentage to zero if there's been no votes
             }
@@ -141,22 +141,19 @@ class Units_m extends MY_Model{
             else                    // otherwise user has rated before
             {
                 $q = $q->result();
-                if ($q[0]->rate_up == 1)
-                { return 1; }
-                else if ($q[0]->rate_down == 1)
-                { return -1; }
+            return $q[0]->rating;
             }
         }
         
-        public function positive_ratings($id)
+        public function positive_ratings_for_unit($id)
         {   // this returns the number of positive ratings
-            $sql = "SELECT COUNT(*) AS positive FROM rating WHERE unit_id = ? AND rate_up = 1";
+            $sql = "SELECT COUNT(*) AS positive FROM rating WHERE unit_id = ? AND rating = '1'";
             $q = $this->db->query($sql, $id);
             $q = $q->result();
             return ($q[0]->positive);
         }
         
-        public function total_ratings($id)
+        public function total_ratings_for_unit($id)
         {   // this returns the total number of times this unit has been voted on
             $sql = "SELECT COUNT(*) AS total FROM rating WHERE unit_id = ?";
             $q = $this->db->query($sql, $id);
@@ -170,9 +167,9 @@ class Units_m extends MY_Model{
             $curr_rating = $this->user_has_rated_unit($id);
             if ($curr_rating == 0) // if no rating exists
             {
-                $sql = "INSERT INTO rating (user_id, unit_id, rate_up) VALUES (?, ?, 1)";
+                $sql = "INSERT INTO rating (user_id, unit_id, rating) VALUES (?, ?, '1')";
             } else {// otherwise the user had rated down (rated up can't be accessed twice because option not available)
-                $sql = "UPDATE rating SET rate_up = 1, rate_down = 0 WHERE user_id = ? AND unit_id = ?";
+                $sql = "UPDATE rating SET rating = '1' WHERE user_id = ? AND unit_id = ?";
             }
             $this->db->query($sql, $args);
         }
@@ -183,9 +180,9 @@ class Units_m extends MY_Model{
             $curr_rating = $this->user_has_rated_unit($id);
             if ($curr_rating == 0) // if no rating exists
             {
-                $sql = "INSERT INTO rating (user_id, unit_id, rate_down) VALUES (?, ?, 1)";
-            } else {// this sets up rating to 0 and down rating to 1
-                $sql = "UPDATE rating SET rate_up = 0, rate_down = 1 WHERE user_id = ? AND unit_id = ?";
+                $sql = "INSERT INTO rating (user_id, unit_id, rating) VALUES (?, ?, '-1')";
+            } else {// this sets up rating to -1
+                $sql = "UPDATE rating SET rating = '-1' WHERE user_id = ? AND unit_id = ?";
             }
             $this->db->query($sql, $args);
         }

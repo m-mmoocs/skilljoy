@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 06, 2014 at 12:36 AM
+-- Generation Time: Mar 06, 2014 at 04:08 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -30,19 +30,17 @@ CREATE TABLE IF NOT EXISTS `rating` (
   `key` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `unit_id` bigint(20) NOT NULL,
-  `rate_up` tinyint(1) NOT NULL,
-  `rate_down` tinyint(1) NOT NULL,
+  `rating` enum('-1','1') NOT NULL,
   PRIMARY KEY (`key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `rating`
 --
 
-INSERT INTO `rating` (`key`, `user_id`, `unit_id`, `rate_up`, `rate_down`) VALUES
-(1, 4, 1, 0, 1),
-(2, 4, 18, 0, 1),
-(3, 4, 2, 0, 1);
+INSERT INTO `rating` (`key`, `user_id`, `unit_id`, `rating`) VALUES
+(9, 4, 1, '1'),
+(10, 4, 6, '1');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
