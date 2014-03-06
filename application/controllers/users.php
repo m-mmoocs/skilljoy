@@ -3,7 +3,7 @@
 class Users extends MY_Controller{
 
 	public function index(){
-		
+            
 	}
         
         public function login(){
@@ -36,9 +36,13 @@ class Users extends MY_Controller{
         public function g_login(){
             $this->load->library('Gconnect');
             if (isset($_GET['code'])) { // we received the positive auth callback, get the token and store it in session
-                $this->gconnect->authenticate();
+                $this->gconnect->my_authenticate($_GET['code']);
                 // get user info	
-                $user_profile = $this->gconnect->oauth2->userinfo->get();
+                $user_profile = $this->gconnect->get_userinfo();
+                
+//                            $friends = $this->gconnect->get_friends_list();
+//                            
+//                            $this->smrke->debug($friends);
                 $this->user->login_g($user_profile);
                 $redirect = $this->session->userdata('last_page')?$this->session->userdata('last_page'):base_url();
                 header('Location:'.$redirect);
