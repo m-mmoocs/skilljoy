@@ -1,0 +1,58 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+
+
+class Questions_m extends MY_Model{	
+
+	function __construct(){
+		parent::__construct();
+	}
+        
+	public function get_question_with_unit_id($id){
+            $sql = "SELECT * FROM questions WHERE unit_id = ? ";
+            $q = $this->db->query($sql,$id);
+            $q = $q->result();
+            return $q;
+        } 
+        
+        public function get_answer_with_unit_id($id){
+            $sql = "SELECT * FROM questions WHERE unit_id = ?";
+            $q = $this->db->query($sql,$id);
+            if($q->num_rows >= 1){
+                $q = $q->result();
+                $q2 = $q[0];
+                $this->load->model('answers_m');
+                $q2->ans = $this->answers_m->get_answer_with_id($q2->id);
+                return $q2->ans;
+            
+            }
+        }
+        
+         public function add_questions($arr){
+             
+            $args = array();
+            $field_names = "";
+            $values = "";
+            foreach($arr as $key => $value){ 
+               
+                $field_names .= $key.",";
+                $args[] = $value;
+                $values .= "?,";
+            }
+           
+            $field_names .='user_name';
+            $args[] =$this->user->Data('firstname');
+            $values .= "?";
+             
+            $sql = "INSERT INTO questions ($field_names) VALUES ($values)";
+            if($this->db->query($sql,$args)){
+                $sql = "SELECT LAST_INSERT_ID() AS id FROM questions";
+                $q = $this->db->query($sql);
+                $q = $q->result();
+                return $q[0]->id;
+            }
+            else return FALSE;
+        }
+        
+}
+

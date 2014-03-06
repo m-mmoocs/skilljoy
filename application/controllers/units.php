@@ -11,11 +11,24 @@ class Units extends MY_Controller {
 
     public function show($id) {
         $this->load->model('units_m');
+        if (isset($_POST['add_questions'])) {  // if user has clicked the submit button
+             $this->units_m->save_question($_POST);
+             header('Location:' . base_url());
+             exit();
+        }
+        
+        if( isset($_POST['add_answers'])){
+            $this->units_m->save_answers($_POST);
+            header('Location:' . base_url());
+            exit();
+        }
+        
         $this->load->model('subjects_m');
         if(!$unit=$this->units_m->get_unit_with_id($id)){
             header('Location:'.base_url());
             exit();
         }
+        
         $page = new Page('unit');
         if ($subjects = $this->subjects_m->get_subjects_for_unit($unit->id))
         {   // ensures there are returned rows before sending to page
@@ -25,6 +38,7 @@ class Units extends MY_Controller {
         $page->Data('rate_status', $rate_status);
         $page->Data('unit', $unit);
         $page->show();
+        
     }
 
     public function save_unit() {
@@ -45,7 +59,7 @@ class Units extends MY_Controller {
                 exit();
             }
         }
-
+        
         $page = new Page('unit');
         $page->Data('content_types', $this->materials_m->get_content_types());
         $page->Data('subjects', $this->subjects_m->get_all_subjects());
@@ -53,6 +67,7 @@ class Units extends MY_Controller {
         $page->show();
     }
 
+ 
     public function extract_id() {
         /* This function takes the POST data and extracts video IDs for vimeo
           and youtube videos along with the content_type, then reassigns them into
