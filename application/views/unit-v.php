@@ -23,6 +23,26 @@ else
 ?>
 </div>
 <hr>
+<div class="rate">
+    <?php if ($rate_status['total_rates'] == 0): ?>
+        <p>This unit has not been voted on!</p>
+    <?php else: ?>
+        <p>This unit has a rating of <?php echo $rate_status['percentage']; ?>% positive votes out of <?php echo $rate_status['total_rates']; ?> votes.</p>
+    <?php endif; ?>
+    <?php if($this->user && $this->user->status()==='active'): ?>
+        <?php if ($rate_status['has_rated'] == 1): ?>
+            Rate Up <a href="<?php echo base_url('units/rate_down/'.$unit->id); ?>">Rate Down</a>
+        <?php elseif ($rate_status['has_rated'] == -1): ?>
+            <a href="<?php echo base_url('units/rate_up/'.$unit->id); ?>">Rate Up</a> Rate Down
+        <?php else: ?>
+            <a href="<?php echo base_url('units/rate_up/'.$unit->id); ?>">Rate Up</a>
+            <a href="<?php echo base_url('units/rate_down/'.$unit->id); ?>">Rate Down</a>
+        <?php endif; ?>
+    <?php else: ?>
+            <p>Log in to vote!</p>
+    <?php endif; ?>        
+</div>
+<br />
 <div class="unit-materials">
     
 <!-- only shows primary materials --> 
