@@ -18,6 +18,12 @@ class Units extends MY_Controller {
              exit();
         }
         
+        if( isset($_POST['add_answers'])){
+            $this->units_m->save_answers($_POST);
+            header('Location:' . base_url());
+            exit();
+        }
+        
         $page = new Page('unit');
         $page->Data('unit', $this->units_m->get_unit_with_id($id));
         $page->show();

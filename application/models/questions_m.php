@@ -45,7 +45,6 @@ class Questions_m extends MY_Model{
             $values .= "?";
              
             $sql = "INSERT INTO questions ($field_names) VALUES ($values)";
-     //       $sql= "INSERT INTO questions ('id', 'unit_id', 'question', 'user_name') VALUES (NULL, '5', '123', 'abc');";
             if($this->db->query($sql,$args)){
                 $sql = "SELECT LAST_INSERT_ID() AS id FROM questions";
                 $q = $this->db->query($sql);

@@ -54,10 +54,15 @@ class Units_m extends MY_Model{
         } // end save_unit
         
         public function save_question($arr){
-         //   $this->smrke->Debug($arr);
             $this->load->model('questions_m');
             $quest = array('unit_id' => $arr['unit_id'],'question'=> $arr['question']); //for adding question
             $this->questions_m->add_questions($quest); //for adding question
+        }
+        
+        public function save_answers($arr){
+            $this->load->model('answers_m');
+            $quest = array('question_id' => $arr['question_id'],'answers'=> $arr['answers']); //for adding question
+            $this->answers_m->add_answers($quest); //for adding question
         }
         
         public function add_unit($arr){

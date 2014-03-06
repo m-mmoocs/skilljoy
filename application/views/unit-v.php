@@ -1,7 +1,7 @@
 <?php 
 
 ?>
-<form action="" method="post">  
+
 <h2 class="unit-title"><?php echo ucwords($unit->title); ?></h2>
  
 <p  class="unit-description"><?php echo ucfirst($unit->description); ?></p>
@@ -50,9 +50,14 @@
                 echo ' </a><br /><br />';
                 }
      ?> 
-
-<p>Have a question? Ask here -> <input type="hidden" name="unit_id" value="<?php echo $unit->id; ?>">
+<?php
+    if($this->user && $this->user->status()==='active')
+    { ?>
+<form action="" method="post">  
+<p>Have a question? Ask here -> 
+<input type="hidden" name="unit_id" value="<?php echo $unit->id; ?>">
 <input type ="text" name="question"> <input type="submit" name="add_questions" value="Submit"> 
+</form>
 </p><br />
 <?php
         echo '<p>Posted Questions</p><br />';
@@ -61,16 +66,24 @@
             //$this->smrke->Debug($unit);
             echo $quest->question . ' (by '.$quest->user_name.')<br />';
             
+            
             foreach($unit->answers as $ans)
-            {
+            {   
                 if($ans->question_id == $quest->id)
                     echo 'A: ' . $ans->answers . ' (by '.$ans->user_name .')<br/>';
                 
             }
+            echo '<form action="" method="post">';
+            echo '<p><input type="hidden" name="question_id" value="'.$quest->id. '"> <input type ="text" name="answers"  > '; 
+            echo '<input type="submit" name="add_answers" value="Reply"><br /></p></form>';
             echo '<br />';
-            echo '<p>Enter your answer here: <input type ="text" name="answers"  ></p><br />'; 
+            
+            
         }
-   //  $this->smrke->debug($this->user)  ;
+    }
+    else
+    {
+        echo '<p>Please login to Ask / See Posted Questions</p>';
+    }
 ?>
 </div>
-</form>
