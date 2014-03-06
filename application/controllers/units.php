@@ -21,6 +21,8 @@ class Units extends MY_Controller {
         {   // ensures there are returned rows before sending to page
             $page->Data('subjects', $subjects);
         }
+        $rate_status = $this->units_m->rating_info_for_unit($id);
+        $page->Data('rate_status', $rate_status);
         $page->Data('unit', $unit);
         $page->show();
     }
@@ -110,5 +112,17 @@ class Units extends MY_Controller {
         }
     }
 
-
+    public function rate_up($uid)   // called when user clicks Rate Up 
+    {
+        $this->load->model('units_m');          // load the model
+        $this->units_m->set_rate_up($uid);      
+        $this->show($uid);                      // reload the page
+    }
+    
+    public function rate_down($uid) // called when user clicks Rate Up 
+    {
+        $this->load->model('units_m');          
+        $this->units_m->set_rate_down($uid);      
+        $this->show($uid); 
+    }
 }
