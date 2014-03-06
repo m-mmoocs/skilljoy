@@ -3,10 +3,53 @@
 ?>
 
 <h2 class="unit-title"><?php echo ucwords($unit->title); ?></h2>
+<<<<<<< HEAD
  
 <p  class="unit-description"><?php echo ucfirst($unit->description); ?></p>
 <hr>
 
+=======
+<p  class="unit-description"><?php echo nl2br(ucfirst($unit->description)); ?></p>
+
+<div class="subject_tags">
+<hr>
+<h3>Tags:</h3>
+<?php
+if (!empty($subjects))
+{
+    foreach($subjects as $sub)
+    {
+        echo '<a href="'.base_url('subjects/show/'.$sub->id).'">'.$sub->name.'</a>  ';
+    }
+}
+else
+{
+    echo 'This unit has not been tagged to a subject.';
+}
+?>
+</div>
+<hr>
+<div class="rate">
+    <?php if ($rate_status['total_rates'] == 0): ?>
+        <p>This unit has not been voted on!</p>
+    <?php else: ?>
+        <p>This unit has a rating of <?php echo $rate_status['percentage']; ?>% positive votes out of <?php echo $rate_status['total_rates']; ?> votes.</p>
+    <?php endif; ?>
+    <?php if($this->user && $this->user->status()==='active'): ?>
+        <?php if ($rate_status['has_rated'] == 1): ?>
+            Rate Up <a href="<?php echo base_url('units/rate_down/'.$unit->id); ?>">Rate Down</a>
+        <?php elseif ($rate_status['has_rated'] == -1): ?>
+            <a href="<?php echo base_url('units/rate_up/'.$unit->id); ?>">Rate Up</a> Rate Down
+        <?php else: ?>
+            <a href="<?php echo base_url('units/rate_up/'.$unit->id); ?>">Rate Up</a>
+            <a href="<?php echo base_url('units/rate_down/'.$unit->id); ?>">Rate Down</a>
+        <?php endif; ?>
+    <?php else: ?>
+            <p>Log in to vote!</p>
+    <?php endif; ?>        
+</div>
+<br />
+>>>>>>> origin/main
 <div class="unit-materials">
  
 <!-- only shows primary materials --> 
@@ -28,7 +71,7 @@
                 echo '<br /><br />';
     }    
     ?>
-    
+ 
 <!-- Show all the secondary materials -->
     <?php   
             foreach($unit->secondary_material as $s){
@@ -50,6 +93,7 @@
                 echo ' </a><br /><br />';
                 }
      ?> 
+<<<<<<< HEAD
 <?php
     if($this->user && $this->user->status()==='active')
     { ?>
@@ -87,3 +131,7 @@
     }
 ?>
 </div>
+=======
+</div>
+
+>>>>>>> origin/main
