@@ -11,8 +11,6 @@ class Units extends MY_Controller {
 
     public function show($id) {
         $this->load->model('units_m');
-<<<<<<< HEAD
-        
         if (isset($_POST['add_questions'])) {  // if user has clicked the submit button
              $this->units_m->save_question($_POST);
              header('Location:' . base_url());
@@ -25,13 +23,12 @@ class Units extends MY_Controller {
             exit();
         }
         
-=======
         $this->load->model('subjects_m');
         if(!$unit=$this->units_m->get_unit_with_id($id)){
             header('Location:'.base_url());
             exit();
         }
->>>>>>> origin/main
+        
         $page = new Page('unit');
         if ($subjects = $this->subjects_m->get_subjects_for_unit($unit->id))
         {   // ensures there are returned rows before sending to page
@@ -47,13 +44,8 @@ class Units extends MY_Controller {
     public function save_unit() {
         $this->load->model('units_m');
         $this->load->model('materials_m');
-<<<<<<< HEAD
-        
-        
-=======
         $this->load->model('subjects_m');
 
->>>>>>> origin/main
         if (!$this->user || $this->user->status() !== 'active') {
             header("Location:" . base_url());
             exit();
