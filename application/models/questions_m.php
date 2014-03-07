@@ -9,7 +9,7 @@ class Questions_m extends MY_Model{
 	}
         
 	public function get_question_with_unit_id($id){
-            $sql = "SELECT * FROM questions WHERE unit_id = ? ";
+            $sql = "SELECT *,questions.id, users.firstname AS user_name FROM questions INNER JOIN users ON questions.user_id = users.id WHERE unit_id = ? ";
             $q = $this->db->query($sql,$id);
             $q = $q->result();
             return $q;
@@ -40,8 +40,8 @@ class Questions_m extends MY_Model{
                 $values .= "?,";
             }
            
-            $field_names .='user_name';
-            $args[] =$this->user->Data('firstname');
+            $field_names .='user_id';
+            $args[] =$this->user->Data('id');
             $values .= "?";
              
             $sql = "INSERT INTO questions ($field_names) VALUES ($values)";
