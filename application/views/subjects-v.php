@@ -3,6 +3,11 @@
 <?php
     foreach($unit as $u)
     {
+        if ($u->rate_status['total_rates'] == 0)
+            echo 'This unit has not been voted on!';
+        else
+            echo 'Rating: '.$u->rate_status['percentage'].'% positive out of '.$u->rate_status['total_rates'].' votes.';
+
         echo '<a href="'. base_url('units/show/'.$u->id).'"><h3 class="unit-title">'.$u->title.'</h3></a>';
         foreach($u->primary_material as $p)
         {
