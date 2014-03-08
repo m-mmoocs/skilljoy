@@ -2,15 +2,16 @@
 
 class Answers_m extends MY_Model{	
 
-     public function get_answer_with_id($id){
-            $sql = "SELECT * FROM answers";// WHERE question_id = ?";
-            $q = $this->db->query($sql,$id);
+     public function get_answer_with_id($question_id){
+         
+            $sql = "SELECT answers.*, users.firstname AS user_name FROM answers INNER JOIN users ON answers.user_id = users.id WHERE question_id=?";
+            $q = $this->db->query($sql,$question_id);
             $q = $q->result();
             return $q;
      }
      
       public function add_answers($arr){
-           
+            
             $args = array();
             $field_names = "";
             $values = "";
@@ -21,8 +22,8 @@ class Answers_m extends MY_Model{
                 $values .= "?,";
             }
            
-            $field_names .='user_name';
-            $args[] =$this->user->Data('firstname');
+            $field_names .='user_id';
+            $args[] =$this->user->Data('id');
             $values .= "?";
              
             $sql = "INSERT INTO answers ($field_names) VALUES ($values)";

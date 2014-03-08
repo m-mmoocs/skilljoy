@@ -81,8 +81,8 @@ class Units_m extends MY_Model{
         
         public function save_answers($arr){
             $this->load->model('answers_m');
-            $quest = array('question_id' => $arr['question_id'],'answers'=> $arr['answers']); //for adding question
-            $this->answers_m->add_answers($quest); //for adding question
+            $quest = array('question_id' => $arr['question_id'],'answers'=> $arr['answers']); //for adding answer
+            $this->answers_m->add_answers($quest); //for adding answer
         }
         
         public function add_unit($arr){
