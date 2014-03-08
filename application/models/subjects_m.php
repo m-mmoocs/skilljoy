@@ -38,9 +38,7 @@ class Subjects_m extends MY_Model{
             $sql = "SELECT units.id, subjects.name FROM units "
                     . "INNER JOIN units_subject ON units.id = units_subject.unit_id "
                     . "INNER JOIN subjects ON units_subject.subject_id = subjects.id "
-                    . "INNER JOIN rating ON units.id = rating.unit_id "
-                    . "WHERE subject_id = ? "
-                    . "ORDER BY rating DESC";
+                    . "WHERE subject_id = ? ";
             $q = $this->db->query($sql, $id);
             if ($q->num_rows > 0) {
                 $q = $q->result();
