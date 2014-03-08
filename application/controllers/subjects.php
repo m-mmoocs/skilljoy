@@ -22,8 +22,25 @@ class Subjects extends MY_Controller {
             array_push($unit, $this->units_m->get_unit_with_id($r->id));    // append to array
         }
         $page = new Page('subjects');
-        $page->Data('unit', $unit);                                         // send resulting array to page
+        $page->Data('unit', $this->sort_units_by_rating_percentage($unit)); // send resulting array to page
         $page->Data('subject_name', $result[0]->name);                      // along with the subject name for display
         $page->show();
+    }
+    
+    public function sort_units_by_rating_percentage($unit)
+    {
+        for ($y = 0; $y < count($unit); $y++)
+        {
+            for ($x = 0; $x < count($unit)-1; $x++)
+            {
+                if ($unit[$x]->rate_status['percentage'] < $unit[$x+1]->rate_status['percentage'])
+                {
+                    $temp = $unit[$x];
+                    $unit[$x] = $unit[$x+1];
+                    $unit[$x+1] = $temp;
+                }
+            }
+        }
+        return $unit;
     }
 }

@@ -25,23 +25,27 @@ else
 </div>
 <hr>
 <div class="rate">
-    <?php if ($rate_status['total_rates'] == 0): ?>
+    <form action="" method="post">
+        <input type="hidden" name="unit_id" value="<?php echo $unit->id?>">
+    <?php if ($unit->rate_status['total_rates'] == 0): ?>
         <p>This unit has not been voted on!</p>
     <?php else: ?>
-        <p>This unit has a rating of <?php echo $rate_status['percentage']; ?>% positive votes out of <?php echo $rate_status['total_rates']; ?> votes.</p>
+        <p>This unit has a rating of <?php echo $unit->rate_status['percentage']; ?>% positive votes out of <?php echo $unit->rate_status['total_rates']; ?> votes.</p>
     <?php endif; ?>
     <?php if($this->user && $this->user->status()==='active'): ?>
-        <?php if ($rate_status['has_rated'] == 1): ?>
-            Rate Up <a href="<?php echo base_url('units/rate_down/'.$unit->id); ?>">Rate Down</a>
-        <?php elseif ($rate_status['has_rated'] == -1): ?>
-            <a href="<?php echo base_url('units/rate_up/'.$unit->id); ?>">Rate Up</a> Rate Down
+        Rate this unit: 
+        <?php if ($unit->rate_status['has_rated'] == 1): ?>
+            <input type="submit" name="rate_down" value="Down">
+        <?php elseif ($unit->rate_status['has_rated'] == -1): ?>
+            <input type="submit" name="rate_up" value="Up">
         <?php else: ?>
-            <a href="<?php echo base_url('units/rate_up/'.$unit->id); ?>">Rate Up</a>
-            <a href="<?php echo base_url('units/rate_down/'.$unit->id); ?>">Rate Down</a>
+            <input type="submit" name="rate_up" value="Up">
+            <input type="submit" name="rate_down" value="Down">
         <?php endif; ?>
     <?php else: ?>
             <p>Log in to vote!</p>
     <?php endif; ?>        
+    </form>
 </div>
 <br />
 <div class="unit-materials">
