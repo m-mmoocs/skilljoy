@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 06, 2014 at 04:08 AM
+-- Generation Time: Mar 08, 2014 at 08:36 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -26,21 +26,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `rating`
 --
 
-CREATE TABLE IF NOT EXISTS `rating` (
+DROP TABLE IF EXISTS `rating`;
+CREATE TABLE `rating` (
   `key` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `unit_id` bigint(20) NOT NULL,
   `rating` enum('-1','1') NOT NULL,
   PRIMARY KEY (`key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
-
---
--- Dumping data for table `rating`
---
-
-INSERT INTO `rating` (`key`, `user_id`, `unit_id`, `rating`) VALUES
-(9, 4, 1, '1'),
-(10, 4, 6, '1');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

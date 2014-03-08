@@ -23,6 +23,16 @@ class Units extends MY_Controller {
             exit();
         }
         
+        if (isset($_POST['rate_up']))
+        {
+            $this->units_m->set_rate_up($_POST['unit_id']);
+        }
+        
+        if (isset($_POST['rate_down']))
+        {
+            $this->units_m->set_rate_down($_POST['unit_id']);
+        }
+        
         $this->load->model('subjects_m');
         if(!$unit=$this->units_m->get_unit_with_id($id)){
             header('Location:'.base_url());
@@ -34,8 +44,6 @@ class Units extends MY_Controller {
         {   // ensures there are returned rows before sending to page
             $page->Data('subjects', $subjects);
         }
-        $rate_status = $this->units_m->rating_info_for_unit($id);
-        $page->Data('rate_status', $rate_status);
         $page->Data('unit', $unit);
         $page->show();
         
@@ -125,19 +133,5 @@ class Units extends MY_Controller {
         if (strlen($_POST['materials'][2]['content']) > 5) {
             $_POST['materials'][2]['content'] = prep_url($_POST['materials'][2]['content']);
         }
-    }
-
-    public function rate_up($uid)   // called when user clicks Rate Up 
-    {
-        $this->load->model('units_m');          // load the model
-        $this->units_m->set_rate_up($uid);      
-        $this->show($uid);                      // reload the page
-    }
-    
-    public function rate_down($uid) // called when user clicks Rate Up 
-    {
-        $this->load->model('units_m');          
-        $this->units_m->set_rate_down($uid);      
-        $this->show($uid); 
     }
 }
