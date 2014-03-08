@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 02, 2014 at 04:38 AM
+-- Generation Time: Mar 08, 2014 at 08:35 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -26,21 +26,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `questions`
 --
 
-CREATE TABLE IF NOT EXISTS `questions` (
+DROP TABLE IF EXISTS `questions`;
+CREATE TABLE `questions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `unit_id` int(11) NOT NULL,
   `question` varchar(300) NOT NULL,
   `user_name` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
-
---
--- Dumping data for table `questions`
---
-
-INSERT INTO `questions` (`id`, `unit_id`, `question`, `user_name`) VALUES
-(1, 5, 'Is pine tree good for start a fire?', 'Shermie'),
-(7, 5, 'Should I use sticks/stone to start a fire?', 'ABC');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
