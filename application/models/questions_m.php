@@ -20,9 +20,13 @@ class Questions_m extends MY_Model{
             $q = $this->db->query($sql,$id);
             if($q->num_rows >= 1){
                 $q = $q->result();
-                $q2 = $q[0];
+                $q3= array();
                 $this->load->model('answers_m');
-                $q2->ans = $this->answers_m->get_answer_with_id($q2->id);
+                foreach($q as $q2)
+                {
+                   array_push($q3, $this->answers_m->get_answer_with_id($q2->id));
+                }
+                $q2->ans = $q3;
                 return $q2->ans;
             
             }

@@ -103,14 +103,14 @@ if($this->user && $this->user->status()==='active')
 </p><br />
 <?php
         echo '<p>Posted Questions</p><br />';
+        $i = 0;
         foreach($unit->questions as $quest)
         {
+            
             echo $quest->question . ' (by '.$quest->user_name.')<br />';
-            foreach($unit->answers as $ans)
+            foreach($unit->answers[$i] as $ans)
             {   
-                if($ans->question_id == $quest->id)
                     echo 'A: ' . $ans->answers . ' (by '.$ans->user_name .')<br/>';
-                
             }
             
             echo '<form action="" method="post">';
@@ -124,6 +124,7 @@ if($this->user && $this->user->status()==='active')
                   echo '<p>Please login to Reply</p>';
             }
             echo '<br />';
+            $i++;
         }
 ?>
 </div>

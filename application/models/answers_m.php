@@ -2,9 +2,10 @@
 
 class Answers_m extends MY_Model{	
 
-     public function get_answer_with_id($id){
-            $sql = "SELECT *, users.firstname AS user_name FROM answers INNER JOIN users ON answers.user_id = users.id";
-            $q = $this->db->query($sql,$id);
+     public function get_answer_with_id($question_id){
+         
+            $sql = "SELECT answers.*, users.firstname AS user_name FROM answers INNER JOIN users ON answers.user_id = users.id WHERE question_id=?";
+            $q = $this->db->query($sql,$question_id);
             $q = $q->result();
             return $q;
      }
