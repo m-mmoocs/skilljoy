@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 07, 2014 at 02:10 AM
+-- Generation Time: Mar 08, 2014 at 08:12 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -30,9 +30,9 @@ CREATE TABLE IF NOT EXISTS `answers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `question_id` int(11) NOT NULL,
   `answers` varchar(300) NOT NULL,
-  `user_id` int(3) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
