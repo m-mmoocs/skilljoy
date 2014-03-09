@@ -72,6 +72,7 @@ class Mui {
         if (preg_match('#(http://www.slideshare.net/+)#i', $input)) {   // if it starts with slideshare.net
             $url = "http://www.slideshare.net/api/oembed/2?url=".$input."&format=json";
             if($this->get_http_response_code($url) != "404"){       // if server doesn't give a 404 response
+                $response = file_get_contents($url);
                 $decode = json_decode($response);
                 if (isset($decode->slideshow_id)) {     // make sure a slideshare id was retrieved
                     return $decode->slideshow_id;
