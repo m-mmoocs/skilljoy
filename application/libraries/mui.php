@@ -71,16 +71,25 @@ class Mui {
     {
         if (preg_match('#(http://www.slideshare.net/+)#i', $input)) {   // if it starts with slideshare.net
             $url = "http://www.slideshare.net/api/oembed/2?url=".$input."&format=json";
-            $response = file_get_contents($url);
-            $decode = json_decode($response);
-            if (isset($decode->slideshow_id)) {     // make sure a slideshare id was retrieved
-                return $decode->slideshow_id;
-            } else {
+            if($this->get_http_response_code($url) != "404"){       // if server doesn't give a 404 response
+                $decode = json_decode($response);
+                if (isset($decode->slideshow_id)) {     // make sure a slideshare id was retrieved
+                    return $decode->slideshow_id;
+                } else {
+                    return FALSE;
+                }
+            }
+            else
+            {
                 return FALSE;
             }
         } else {
             return FALSE;
         }
     }
-
+    
+    function get_http_response_code($url){
+        $headers = get_headers($url);
+        return substr($headers[0], 9, 3);
+    }
 }
