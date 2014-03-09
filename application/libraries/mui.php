@@ -18,6 +18,8 @@ class Mui {
                 return array('content' => $output, 'content_type' => 3);
             } else if ($output = $this->is_valid_youtube($input)) {    // returns extracted video code if it's valid youtube
                 return array('content' => $output, 'content_type' => 1);
+            } else if ($output = $this->is_valid_slideshare($input)) {
+                return array('content' => $output, 'content_type' => 5);
             } else {
                 return array('content' => $input, 'content_type' => 4); // flag as URL, but not a recognized type
             }
@@ -57,6 +59,22 @@ class Mui {
         if (preg_match("/^(http|https):\/\/([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?/i", $url)) {
             if (filter_var($url, FILTER_VALIDATE_URL)) {  // double checking by running through validation filter
                 return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+            return FALSE;
+        }
+    }
+    
+    function is_valid_slideshare($input)
+    {
+        if (preg_match('#(http://www.slideshare.net/+)#i', $input)) {   // if it starts with slideshare.net
+            $url = "http://www.slideshare.net/api/oembed/2?url=".$input."&format=json";
+            $response = file_get_contents($url);
+            $decode = json_decode($response);
+            if (isset($decode->slideshow_id)) {     // make sure a slideshare id was retrieved
+                return $decode->slideshow_id;
             } else {
                 return FALSE;
             }
