@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 10, 2014 at 09:29 PM
+-- Generation Time: Mar 10, 2014 at 09:55 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS `materials`;
 CREATE TABLE IF NOT EXISTS `materials` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `unit_id` bigint(20) unsigned NOT NULL,
-  `content` varchar(2500) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
   `content_type` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `created_by` bigint(20) unsigned NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `materials` (
   `deleted_by` bigint(20) unsigned DEFAULT NULL,
   `primary_mat` int(1) NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=41 ;
 
 --
 -- Dumping data for table `materials`
@@ -107,7 +107,8 @@ INSERT INTO `materials` (`id`, `unit_id`, `content`, `content_type`, `created_at
 (17, 15, 'W2Wb8N0yY5Q', 1, '2014-03-01 10:30:43', 0, NULL, NULL, NULL, NULL, 1),
 (18, 16, 'YRgNOyCnbqg', 1, '2014-03-03 05:14:38', 0, NULL, NULL, NULL, NULL, 1),
 (19, 17, 'rTKV5-ZSWcE', 1, '2014-03-03 05:15:29', 0, NULL, NULL, NULL, NULL, 1),
-(39, 40, '<iframe src="http://www.slideshare.net/slideshow/embed_code/29081610" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/LeanStartupConf/rapid-iteration-for-mobile-app-design" title="Rapid Iteration for Mobile App Design by Mariya Yao" target="_blank">Rapid Iteration for Mobile App Design by Mariya Yao</a> </strong> from <strong><a href="http://www.slideshare.net/LeanStartupConf" target="_blank">LeanStartupConf</a></strong> </div>\n\n', 5, '2014-03-10 20:52:05', 0, NULL, NULL, NULL, NULL, 1);
+(39, 40, '<iframe src="http://www.slideshare.net/slideshow/embed_code/29081610" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/LeanStartupConf/rapid-iteration-for-mobile-app-design" title="Rapid Iteration for Mobile App Design by Mariya Yao" target="_blank">Rapid Iteration for Mobile App Design by Mariya Yao</a> </strong> from <strong><a href="http://www.slideshare.net/LeanStartupConf" target="_blank">LeanStartupConf</a></strong> </div>\n\n', 5, '2014-03-10 20:52:05', 0, NULL, NULL, NULL, NULL, 1),
+(40, 41, '<iframe src="http://www.slideshare.net/slideshow/embed_code/2526596" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/osscube/indexing-the-mysql-index-key-to-performance-tuning" title="Indexing the MySQL Index: Key to performance tuning" target="_blank">Indexing the MySQL Index: Key to performance tuning</a> </strong> from <strong><a href="http://www.slideshare.net/osscube" target="_blank">OSSCube LLC A Global Open Source Enterprise for Open Source Solutions</a></strong> </div>\n\n', 5, '2014-03-10 21:54:03', 0, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -215,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `units` (
   `deleted_at` datetime DEFAULT NULL,
   `deleted_by` bigint(20) unsigned DEFAULT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=42 ;
 
 --
 -- Dumping data for table `units`
@@ -236,7 +237,8 @@ INSERT INTO `units` (`id`, `user_id`, `title`, `description`, `created_at`, `cre
 (15, 4, 'Ayumi', '', '2014-03-01 10:30:43', 0, NULL, NULL, NULL, NULL),
 (16, 4, 'Machima - Internet is for Porn', 'WoW remake of an Avenue Q song', '2014-03-03 05:14:37', 0, NULL, NULL, NULL, NULL),
 (17, 4, 'How to Sharpen Knives', '', '2014-03-03 05:15:29', 0, NULL, NULL, NULL, NULL),
-(40, 4, 'Mobile App Dev', '', '2014-03-10 20:52:05', 0, NULL, NULL, NULL, NULL);
+(40, 4, 'Mobile App Dev', '', '2014-03-10 20:52:05', 0, NULL, NULL, NULL, NULL),
+(41, 4, 'SQL index guide', '', '2014-03-10 21:54:03', 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
