@@ -13,13 +13,13 @@ class Units extends MY_Controller {
         $this->load->model('units_m');
         if (isset($_POST['add_questions'])) {  // if user has clicked the submit button
              $this->units_m->save_question($_POST);
-             header('Location:' . base_url());
+             header('Location:' . base_url('units/show/'.$id));
              exit();
         }
         
         if( isset($_POST['add_answers'])){
             $this->units_m->save_answers($_POST);
-            header('Location:' . base_url());
+            header('Location:' . base_url('units/show/'.$id));
             exit();
         }
         
