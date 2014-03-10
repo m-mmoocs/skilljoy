@@ -65,7 +65,10 @@ else
                 {
                     $this->load->view('materials/vimeo-v', $p);
                 }
-                
+                elseif ($p->content_type == 5) // -------- if it's a slideshare URL
+                {
+                    $this->load->view('materials/slideshare-v', $p);
+                }                
                 echo '<br /><br />';
     }    
     ?>
@@ -86,6 +89,10 @@ else
                 {
                     $this->load->view('materials/vimeo-v', $s);
                 }
+                elseif ($p->content_type == 5) // -------- if it's a slideshare URL
+                {
+                    $this->load->view('materials/slideshare-v', $s);
+                }           
                 else 
                     echo '<a target="_blank" href="'.$s->content.'">'.$s->content;
                 echo ' </a><br /><br />';

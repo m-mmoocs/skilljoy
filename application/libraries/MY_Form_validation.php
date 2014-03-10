@@ -18,6 +18,9 @@ class MY_Form_validation extends CI_Form_validation {
             return TRUE;
         } else if ($ci->mui->is_valid_youtube($input)) {
             return TRUE;
+        } else if ($ci->mui->is_valid_slideshare($input)) {
+            return TRUE;
+            
         } else {
             return FALSE;       // return false if it's not one of the three supported types for primary material
         }

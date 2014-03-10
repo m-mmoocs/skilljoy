@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 08, 2014 at 08:38 PM
+-- Generation Time: Mar 09, 2014 at 11:24 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -29,22 +29,13 @@ USE `skilljoy`;
 --
 
 DROP TABLE IF EXISTS `answers`;
-CREATE TABLE `answers` (
+CREATE TABLE IF NOT EXISTS `answers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `question_id` int(11) NOT NULL,
   `answers` varchar(300) NOT NULL,
-  `user_name` varchar(30) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
-
---
--- Dumping data for table `answers`
---
-
-INSERT INTO `answers` (`id`, `question_id`, `answers`, `user_name`) VALUES
-(3, 1, 'It doesn''t matter', 'Sam'),
-(9, 1, 'I think its good to use pine tree!', 'Amy'),
-(10, 8, 'Dry weather!', 'T');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -53,11 +44,11 @@ INSERT INTO `answers` (`id`, `question_id`, `answers`, `user_name`) VALUES
 --
 
 DROP TABLE IF EXISTS `content_types`;
-CREATE TABLE `content_types` (
+CREATE TABLE IF NOT EXISTS `content_types` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `content_types`
@@ -67,7 +58,8 @@ INSERT INTO `content_types` (`id`, `name`) VALUES
 (1, 'Youtube'),
 (2, 'PDF'),
 (3, 'Vimeo'),
-(4, 'URL');
+(4, 'URL'),
+(5, 'Slideshare');
 
 -- --------------------------------------------------------
 
@@ -76,7 +68,7 @@ INSERT INTO `content_types` (`id`, `name`) VALUES
 --
 
 DROP TABLE IF EXISTS `materials`;
-CREATE TABLE `materials` (
+CREATE TABLE IF NOT EXISTS `materials` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `unit_id` bigint(20) unsigned NOT NULL,
   `content` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
@@ -89,7 +81,7 @@ CREATE TABLE `materials` (
   `deleted_by` bigint(20) unsigned DEFAULT NULL,
   `primary_mat` int(1) NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `materials`
@@ -115,7 +107,8 @@ INSERT INTO `materials` (`id`, `unit_id`, `content`, `content_type`, `created_at
 (17, 15, 'W2Wb8N0yY5Q', 1, '2014-03-01 10:30:43', 0, NULL, NULL, NULL, NULL, 1),
 (18, 16, 'YRgNOyCnbqg', 1, '2014-03-03 05:14:38', 0, NULL, NULL, NULL, NULL, 1),
 (19, 17, 'rTKV5-ZSWcE', 1, '2014-03-03 05:15:29', 0, NULL, NULL, NULL, NULL, 1),
-(20, 18, 'SvDgW_D2ico', 1, '2014-03-03 05:16:27', 0, NULL, NULL, NULL, NULL, 1);
+(20, 18, 'SvDgW_D2ico', 1, '2014-03-03 05:16:27', 0, NULL, NULL, NULL, NULL, 1),
+(21, 19, '2489433', 5, '2014-03-09 11:18:05', 0, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -124,22 +117,13 @@ INSERT INTO `materials` (`id`, `unit_id`, `content`, `content_type`, `created_at
 --
 
 DROP TABLE IF EXISTS `questions`;
-CREATE TABLE `questions` (
+CREATE TABLE IF NOT EXISTS `questions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `unit_id` int(11) NOT NULL,
   `question` varchar(300) NOT NULL,
-  `user_name` varchar(30) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
-
---
--- Dumping data for table `questions`
---
-
-INSERT INTO `questions` (`id`, `unit_id`, `question`, `user_name`) VALUES
-(1, 5, 'Is pine tree good for start a fire?', 'Shermie'),
-(7, 5, 'Should I use sticks/stone to start a fire?', 'ABC'),
-(8, 1, 'What is best weather to start a fire?', 'T');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -148,13 +132,13 @@ INSERT INTO `questions` (`id`, `unit_id`, `question`, `user_name`) VALUES
 --
 
 DROP TABLE IF EXISTS `rating`;
-CREATE TABLE `rating` (
+CREATE TABLE IF NOT EXISTS `rating` (
   `key` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `unit_id` bigint(20) NOT NULL,
   `rating` enum('-1','1') NOT NULL,
   PRIMARY KEY (`key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `rating`
@@ -163,8 +147,9 @@ CREATE TABLE `rating` (
 INSERT INTO `rating` (`key`, `user_id`, `unit_id`, `rating`) VALUES
 (9, 4, 1, '-1'),
 (10, 4, 6, '1'),
-(11, 4, 18, '1'),
-(12, 4, 7, '1');
+(11, 4, 18, '-1'),
+(12, 4, 7, '1'),
+(13, 4, 19, '1');
 
 -- --------------------------------------------------------
 
@@ -173,7 +158,7 @@ INSERT INTO `rating` (`key`, `user_id`, `unit_id`, `rating`) VALUES
 --
 
 DROP TABLE IF EXISTS `subjects`;
-CREATE TABLE `subjects` (
+CREATE TABLE IF NOT EXISTS `subjects` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `parent_id` bigint(20) unsigned NOT NULL,
@@ -218,7 +203,7 @@ INSERT INTO `subjects` (`id`, `name`, `parent_id`, `created_at`, `created_by`, `
 --
 
 DROP TABLE IF EXISTS `units`;
-CREATE TABLE `units` (
+CREATE TABLE IF NOT EXISTS `units` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -230,7 +215,7 @@ CREATE TABLE `units` (
   `deleted_at` datetime DEFAULT NULL,
   `deleted_by` bigint(20) unsigned DEFAULT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `units`
@@ -251,7 +236,8 @@ INSERT INTO `units` (`id`, `user_id`, `title`, `description`, `created_at`, `cre
 (15, 4, 'Ayumi', '', '2014-03-01 10:30:43', 0, NULL, NULL, NULL, NULL),
 (16, 4, 'Machima - Internet is for Porn', 'WoW remake of an Avenue Q song', '2014-03-03 05:14:37', 0, NULL, NULL, NULL, NULL),
 (17, 4, 'How to Sharpen Knives', '', '2014-03-03 05:15:29', 0, NULL, NULL, NULL, NULL),
-(18, 4, 'How to Gut a Fish', '', '2014-03-03 05:16:27', 0, NULL, NULL, NULL, NULL);
+(18, 4, 'How to Gut a Fish', '', '2014-03-03 05:16:27', 0, NULL, NULL, NULL, NULL),
+(19, 4, 'Building Fire (slideshow)', '', '2014-03-09 11:18:05', 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -260,12 +246,12 @@ INSERT INTO `units` (`id`, `user_id`, `title`, `description`, `created_at`, `cre
 --
 
 DROP TABLE IF EXISTS `units_subject`;
-CREATE TABLE `units_subject` (
+CREATE TABLE IF NOT EXISTS `units_subject` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `unit_id` bigint(20) unsigned NOT NULL,
   `subject_id` bigint(20) unsigned NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=30 ;
 
 --
 -- Dumping data for table `units_subject`
@@ -295,7 +281,10 @@ INSERT INTO `units_subject` (`id`, `unit_id`, `subject_id`) VALUES
 (23, 16, 8),
 (24, 17, 20),
 (25, 18, 1),
-(26, 18, 21);
+(26, 18, 21),
+(27, 19, 2),
+(28, 19, 13),
+(29, 19, 1);
 
 -- --------------------------------------------------------
 
@@ -304,7 +293,7 @@ INSERT INTO `units_subject` (`id`, `unit_id`, `subject_id`) VALUES
 --
 
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
@@ -339,13 +328,13 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `status
 --
 
 DROP TABLE IF EXISTS `user_login_log`;
-CREATE TABLE `user_login_log` (
+CREATE TABLE IF NOT EXISTS `user_login_log` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `method` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `user_login_log`
@@ -383,7 +372,8 @@ INSERT INTO `user_login_log` (`id`, `user_id`, `datetime`, `method`) VALUES
 (32, 4, '2014-03-06 00:31:27', 'google'),
 (33, 4, '2014-03-06 03:59:55', 'google'),
 (34, 4, '2014-03-06 23:42:19', 'google'),
-(35, 4, '2014-03-08 20:31:32', 'google');
+(35, 4, '2014-03-08 20:31:32', 'google'),
+(36, 4, '2014-03-09 11:09:01', 'google');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

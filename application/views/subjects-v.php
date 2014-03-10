@@ -23,6 +23,10 @@
             {
                 $this->load->view('materials/vimeo-v', $p);
             }
+            elseif ($p->content_type == 5) // -------- if it's a slideshare URL
+            {
+                $this->load->view('materials/slideshare-v', $p);
+            }           
             echo '<br /><br />';
         }
     }
