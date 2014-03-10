@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 09, 2014 at 11:24 AM
+-- Generation Time: Mar 10, 2014 at 09:55 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS `materials`;
 CREATE TABLE IF NOT EXISTS `materials` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `unit_id` bigint(20) unsigned NOT NULL,
-  `content` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
   `content_type` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
   `created_by` bigint(20) unsigned NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `materials` (
   `deleted_by` bigint(20) unsigned DEFAULT NULL,
   `primary_mat` int(1) NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=41 ;
 
 --
 -- Dumping data for table `materials`
@@ -107,8 +107,8 @@ INSERT INTO `materials` (`id`, `unit_id`, `content`, `content_type`, `created_at
 (17, 15, 'W2Wb8N0yY5Q', 1, '2014-03-01 10:30:43', 0, NULL, NULL, NULL, NULL, 1),
 (18, 16, 'YRgNOyCnbqg', 1, '2014-03-03 05:14:38', 0, NULL, NULL, NULL, NULL, 1),
 (19, 17, 'rTKV5-ZSWcE', 1, '2014-03-03 05:15:29', 0, NULL, NULL, NULL, NULL, 1),
-(20, 18, 'SvDgW_D2ico', 1, '2014-03-03 05:16:27', 0, NULL, NULL, NULL, NULL, 1),
-(21, 19, '2489433', 5, '2014-03-09 11:18:05', 0, NULL, NULL, NULL, NULL, 1);
+(39, 40, '<iframe src="http://www.slideshare.net/slideshow/embed_code/29081610" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/LeanStartupConf/rapid-iteration-for-mobile-app-design" title="Rapid Iteration for Mobile App Design by Mariya Yao" target="_blank">Rapid Iteration for Mobile App Design by Mariya Yao</a> </strong> from <strong><a href="http://www.slideshare.net/LeanStartupConf" target="_blank">LeanStartupConf</a></strong> </div>\n\n', 5, '2014-03-10 20:52:05', 0, NULL, NULL, NULL, NULL, 1),
+(40, 41, '<iframe src="http://www.slideshare.net/slideshow/embed_code/2526596" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/osscube/indexing-the-mysql-index-key-to-performance-tuning" title="Indexing the MySQL Index: Key to performance tuning" target="_blank">Indexing the MySQL Index: Key to performance tuning</a> </strong> from <strong><a href="http://www.slideshare.net/osscube" target="_blank">OSSCube LLC A Global Open Source Enterprise for Open Source Solutions</a></strong> </div>\n\n', 5, '2014-03-10 21:54:03', 0, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `subjects` (
   `deleted_by` bigint(20) unsigned DEFAULT NULL,
   `status` enum('pending','confirmed') COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `subjects`
@@ -194,7 +194,8 @@ INSERT INTO `subjects` (`id`, `name`, `parent_id`, `created_at`, `created_by`, `
 (18, 'Hikki', 0, '2014-03-01 10:27:31', 0, NULL, NULL, NULL, NULL, 'confirmed'),
 (19, 'Ayumi Hamasaki', 0, '2014-03-01 10:30:43', 0, NULL, NULL, NULL, NULL, 'confirmed'),
 (20, 'Knife Sharpening', 0, '2014-03-03 05:15:29', 0, NULL, NULL, NULL, NULL, 'confirmed'),
-(21, 'Cleaning Fish', 0, '2014-03-03 05:16:27', 0, NULL, NULL, NULL, NULL, 'confirmed');
+(21, 'Cleaning Fish', 0, '2014-03-03 05:16:27', 0, NULL, NULL, NULL, NULL, 'confirmed'),
+(22, 'Java', 0, '2014-03-09 22:10:39', 0, NULL, NULL, NULL, NULL, 'confirmed');
 
 -- --------------------------------------------------------
 
@@ -215,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `units` (
   `deleted_at` datetime DEFAULT NULL,
   `deleted_by` bigint(20) unsigned DEFAULT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=42 ;
 
 --
 -- Dumping data for table `units`
@@ -236,8 +237,8 @@ INSERT INTO `units` (`id`, `user_id`, `title`, `description`, `created_at`, `cre
 (15, 4, 'Ayumi', '', '2014-03-01 10:30:43', 0, NULL, NULL, NULL, NULL),
 (16, 4, 'Machima - Internet is for Porn', 'WoW remake of an Avenue Q song', '2014-03-03 05:14:37', 0, NULL, NULL, NULL, NULL),
 (17, 4, 'How to Sharpen Knives', '', '2014-03-03 05:15:29', 0, NULL, NULL, NULL, NULL),
-(18, 4, 'How to Gut a Fish', '', '2014-03-03 05:16:27', 0, NULL, NULL, NULL, NULL),
-(19, 4, 'Building Fire (slideshow)', '', '2014-03-09 11:18:05', 0, NULL, NULL, NULL, NULL);
+(40, 4, 'Mobile App Dev', '', '2014-03-10 20:52:05', 0, NULL, NULL, NULL, NULL),
+(41, 4, 'SQL index guide', '', '2014-03-10 21:54:03', 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -251,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `units_subject` (
   `unit_id` bigint(20) unsigned NOT NULL,
   `subject_id` bigint(20) unsigned NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=30 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=44 ;
 
 --
 -- Dumping data for table `units_subject`
@@ -280,11 +281,7 @@ INSERT INTO `units_subject` (`id`, `unit_id`, `subject_id`) VALUES
 (22, 16, 14),
 (23, 16, 8),
 (24, 17, 20),
-(25, 18, 1),
-(26, 18, 21),
-(27, 19, 2),
-(28, 19, 13),
-(29, 19, 1);
+(43, 40, 3);
 
 -- --------------------------------------------------------
 
@@ -334,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `user_login_log` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `method` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `user_login_log`
@@ -373,7 +370,9 @@ INSERT INTO `user_login_log` (`id`, `user_id`, `datetime`, `method`) VALUES
 (33, 4, '2014-03-06 03:59:55', 'google'),
 (34, 4, '2014-03-06 23:42:19', 'google'),
 (35, 4, '2014-03-08 20:31:32', 'google'),
-(36, 4, '2014-03-09 11:09:01', 'google');
+(36, 4, '2014-03-09 11:09:01', 'google'),
+(37, 4, '2014-03-09 21:59:21', 'google'),
+(38, 4, '2014-03-10 20:27:13', 'google');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
