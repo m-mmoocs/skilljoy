@@ -73,6 +73,13 @@ class User_m extends MY_Model{
             $this->db->query($sql,array($id,$method));
         }
         
+        public function user_has_permission($id,$perm){
+            $sql = "SELECT permissions.* FROM user_permissions RIGHT JOIN permissions 
+                ON user_permissions.permission_id = permissions.id
+                WHERE user_permissions.user_id = ? AND permissions.name = ?";
+            $q = $this->db->query($sql, array($id,$perm));
+            return $q->num_rows;
+        }
         
 	private function random_string($len){
 		mt_srand((double)microtime()*1000000);
