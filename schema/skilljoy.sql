@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 10, 2014 at 09:55 PM
+-- Generation Time: Mar 17, 2014 at 04:51 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -36,6 +36,36 @@ CREATE TABLE IF NOT EXISTS `answers` (
   `user_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `completed_units_in_series`
+--
+
+DROP TABLE IF EXISTS `completed_units_in_series`;
+CREATE TABLE IF NOT EXISTS `completed_units_in_series` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `series_id` bigint(20) NOT NULL,
+  `unit_id` bigint(20) NOT NULL,
+  `completed_at` datetime NOT NULL,
+  `incomplete_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `completed_units_in_series`
+--
+
+INSERT INTO `completed_units_in_series` (`id`, `user_id`, `series_id`, `unit_id`, `completed_at`, `incomplete_at`) VALUES
+(15, 4, 5, 10, '2014-03-17 06:47:41', '2014-03-17 06:47:45'),
+(16, 4, 5, 10, '2014-03-17 06:47:46', NULL),
+(17, 4, 5, 40, '2014-03-17 06:47:50', '2014-03-17 06:52:11'),
+(18, 4, 5, 6, '2014-03-17 06:50:12', NULL),
+(19, 4, 5, 6, '2014-03-17 06:50:36', NULL),
+(20, 4, 5, 6, '2014-03-17 06:51:31', NULL),
+(21, 4, 5, 6, '2014-03-17 06:51:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -154,6 +184,69 @@ INSERT INTO `rating` (`key`, `user_id`, `unit_id`, `rating`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `series`
+--
+
+DROP TABLE IF EXISTS `series`;
+CREATE TABLE IF NOT EXISTS `series` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `updated_by` bigint(20) NOT NULL,
+  `deleted_at` datetime NOT NULL,
+  `deleted_by` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `series`
+--
+
+INSERT INTO `series` (`id`, `user_id`, `title`, `description`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
+(1, 4, 'test', '', '2014-03-16 08:57:34', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
+(2, 4, '321', '', '2014-03-16 09:02:47', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
+(3, 4, '321', '', '2014-03-16 09:03:06', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
+(4, 4, '321', '', '2014-03-16 09:04:25', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
+(5, 4, '321', '', '2014-03-16 09:05:15', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `series_units`
+--
+
+DROP TABLE IF EXISTS `series_units`;
+CREATE TABLE IF NOT EXISTS `series_units` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `series_id` bigint(20) NOT NULL,
+  `unit_id` bigint(20) NOT NULL,
+  `priority` bigint(5) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `created_by` bigint(20) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `updated_by` bigint(20) NOT NULL,
+  `deleted_at` datetime NOT NULL,
+  `deleted_by` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `series_units`
+--
+
+INSERT INTO `series_units` (`id`, `series_id`, `unit_id`, `priority`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
+(1, 5, 6, 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
+(2, 5, 10, 1, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
+(3, 5, 8, 2, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
+(4, 5, 40, 3, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `subjects`
 --
 
@@ -170,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `subjects` (
   `deleted_by` bigint(20) unsigned DEFAULT NULL,
   `status` enum('pending','confirmed') COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=23 ;
 
 --
 -- Dumping data for table `subjects`
@@ -331,7 +424,7 @@ CREATE TABLE IF NOT EXISTS `user_login_log` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `method` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=42 ;
 
 --
 -- Dumping data for table `user_login_log`
@@ -372,7 +465,10 @@ INSERT INTO `user_login_log` (`id`, `user_id`, `datetime`, `method`) VALUES
 (35, 4, '2014-03-08 20:31:32', 'google'),
 (36, 4, '2014-03-09 11:09:01', 'google'),
 (37, 4, '2014-03-09 21:59:21', 'google'),
-(38, 4, '2014-03-10 20:27:13', 'google');
+(38, 4, '2014-03-10 20:27:13', 'google'),
+(39, 4, '2014-03-15 21:23:51', 'google'),
+(40, 4, '2014-03-16 08:56:54', 'google'),
+(41, 4, '2014-03-17 04:55:15', 'google');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
