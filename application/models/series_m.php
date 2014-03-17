@@ -9,7 +9,7 @@ class Series_m extends MY_Model {
         parent::__construct();
     }
 
-    public function get_all_units() {
+    public function get_all_series() {
         $sql = "SELECT * FROM series WHERE deleted_at IS NULL";
         $q = $this->db->query($sql);
         return $q->result();
