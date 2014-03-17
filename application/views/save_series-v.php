@@ -24,10 +24,11 @@
                 }
             ?>
         </select>
-        <input type='submit' name='apply_subject_filter' value='Apply Filter' />
+        <input type='submit' name='apply_subject_filter' value='Apply Filter / Refresh Unit List' />
     </div>
     <br />
     <?php if (isset($add_remove_error)) {echo $add_remove_error;} ?>
+    <?php if (isset($bump_error)) {echo $bump_error;} ?>
     <br />
     <table name="select_units">
         <tr>
@@ -37,7 +38,7 @@
             <br />
             <td align="center"></td>
             <td align="center"></td>
-            <td align="center"><?php if (isset($_POST['create_series'])) echo form_error('current_selected_units[]');?><?php if (isset($bump_error)) {echo $bump_error;} ?></td>
+            <td align="center"><?php if (isset($_POST['create_series'])) echo form_error('current_selected_units[]');?></td>
         </tr>
         <tr>
             <td height='100%'>

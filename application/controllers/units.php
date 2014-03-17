@@ -138,8 +138,8 @@ class Units extends MY_Controller {
     
     public function create_series()
     {
-        $this->load->model('units_m');
         $this->load->model('subjects_m');
+        $this->load->model('series_m');
         $avail_units = array();
         $selected_units_list = array(); // this holds a list of selected unit numbers
         $selected_units = array();
@@ -217,8 +217,8 @@ class Units extends MY_Controller {
         if (isset($_POST['create_series']))
         {
             if ($this->check_save_series_form()) {      // if the form has been validated
-                $this->smrke->debug("Validation Passed");
-                header('Location:' . base_url());
+                $series_id = $this->series_m->save_series($_POST);
+                header('Location:' . base_url('/series/show/'.$series_id));
                 exit();
             }
         }
