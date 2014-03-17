@@ -65,11 +65,17 @@ class User{
             $this->_log_user_in($user_id,'google');
         }
         
+        public function has_permission($perm){
+            if($this->data['status'] === 'anonymous') return false;
+            else 
+                return $this->ci->user_m->user_has_permission($this->data['id'],$perm);
+        } // end function has_permission
+        
         private function _log_user_in($id,$method='system'){
             // set session
             $this->ci->session->set_userdata("user_id",$id);
             // record login in user_login_log
             $this->ci->user_m->log_user_login($id,$method);
         }
-
+        
 }
