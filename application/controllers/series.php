@@ -27,8 +27,15 @@ class Series extends MY_Controller {
         if (isset($_POST['previous_unit']) && $current_unit != 0) {
             $current_unit--;
         }
+        if (isset($_POST['first_unit']) && $current_unit != 0) {
+            $current_unit = 0;
+        }
+        
         if (isset($_POST['next_unit']) && $current_unit != count($series->unit) - 1) {
             $current_unit++;
+        }
+        if (isset($_POST['last_unit']) && $current_unit != count($series->unit) - 1) {
+            $current_unit = count($series->unit) - 1;
         }
         
         $page = new Page('series');

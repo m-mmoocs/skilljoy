@@ -44,21 +44,22 @@
     </div>
     <table>
         <tr>
-            <td width="150px">
+            <td width="250px" align="center">
         <?php
         if ($current_unit != 0) {
-            echo '<input type="submit" name="previous_unit" value="Previous Unit">';
+            echo '<input type="submit" name="first_unit" value="<< First Unit">';
+            echo '<input type="submit" name="previous_unit" value="< Previous Unit">';
         }
         ?>
             </td>
-            <td width="350px" align="center">
+            <td width="300px" align="center">
 <?php
 if ($this->user->status() != 'anonymous') {
     if (!empty($completed_units) && in_array($series->unit[$current_unit]->id,$completed_units))
     {
             echo '<em>You have completed this unit.</em><br /><input type="submit" name="mark_as_incomplete" value="Mark as Incomplete!">';
     }
-    else if (!empty($completed_units))
+    else if ((!empty($completed_units) && !in_array($series->unit[$current_unit]->id,$completed_units)) || empty($completed_units))
     {
         echo '<input type="submit" name="mark_as_complete" value="Mark this Unit as Complete!">';
     }
@@ -68,10 +69,11 @@ if ($this->user->status() != 'anonymous') {
 ?>
 
             </td>
-            <td width="150px">
+            <td width="250px" align="center">
                 <?php
                 if ($current_unit != ($ctr - 1)) {
-                    echo '<input type="submit" name="next_unit" value="Next Unit">';
+                    echo '<input type="submit" name="next_unit" value="Next Unit >">';
+                    echo '<input type="submit" name="last_unit" value="Last Unit >>">';
                 }
                 ?>
 
@@ -82,6 +84,3 @@ if ($this->user->status() != 'anonymous') {
 </form>
 <br />
 <br />
-
-<?php
-//$this->smrke->debug($this->user->status()); ?>
