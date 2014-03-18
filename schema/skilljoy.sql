@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 17, 2014 at 04:58 PM
+-- Generation Time: Mar 16, 2014 at 03:14 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `materials` (
   `deleted_by` bigint(20) unsigned DEFAULT NULL,
   `primary_mat` int(1) NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=42 ;
 
 --
 -- Dumping data for table `materials`
@@ -138,7 +138,29 @@ INSERT INTO `materials` (`id`, `unit_id`, `content`, `content_type`, `created_at
 (18, 16, 'YRgNOyCnbqg', 1, '2014-03-03 05:14:38', 0, NULL, NULL, NULL, NULL, 1),
 (19, 17, 'rTKV5-ZSWcE', 1, '2014-03-03 05:15:29', 0, NULL, NULL, NULL, NULL, 1),
 (39, 40, '<iframe src="http://www.slideshare.net/slideshow/embed_code/29081610" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/LeanStartupConf/rapid-iteration-for-mobile-app-design" title="Rapid Iteration for Mobile App Design by Mariya Yao" target="_blank">Rapid Iteration for Mobile App Design by Mariya Yao</a> </strong> from <strong><a href="http://www.slideshare.net/LeanStartupConf" target="_blank">LeanStartupConf</a></strong> </div>\n\n', 5, '2014-03-10 20:52:05', 0, NULL, NULL, NULL, NULL, 1),
-(40, 41, '<iframe src="http://www.slideshare.net/slideshow/embed_code/2526596" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/osscube/indexing-the-mysql-index-key-to-performance-tuning" title="Indexing the MySQL Index: Key to performance tuning" target="_blank">Indexing the MySQL Index: Key to performance tuning</a> </strong> from <strong><a href="http://www.slideshare.net/osscube" target="_blank">OSSCube LLC A Global Open Source Enterprise for Open Source Solutions</a></strong> </div>\n\n', 5, '2014-03-10 21:54:03', 0, NULL, NULL, NULL, NULL, 1);
+(40, 41, '<iframe src="http://www.slideshare.net/slideshow/embed_code/2526596" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/osscube/indexing-the-mysql-index-key-to-performance-tuning" title="Indexing the MySQL Index: Key to performance tuning" target="_blank">Indexing the MySQL Index: Key to performance tuning</a> </strong> from <strong><a href="http://www.slideshare.net/osscube" target="_blank">OSSCube LLC A Global Open Source Enterprise for Open Source Solutions</a></strong> </div>\n\n', 5, '2014-03-10 21:54:03', 0, NULL, NULL, NULL, NULL, 1),
+(41, 42, '<iframe src="http://www.slideshare.net/slideshow/embed_code/2121910" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/pritisolanki/php-mysql-for-beginners-2121910" title="Php MySql For Beginners" target="_blank">Php MySql For Beginners</a> </strong> from <strong><a href="http://www.slideshare.net/pritisolanki" target="_blank">Priti Solanki</a></strong> </div>\n\n', 5, '2014-03-10 22:12:36', 2130706433, NULL, NULL, NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permissions`
+--
+
+DROP TABLE IF EXISTS `permissions`;
+CREATE TABLE IF NOT EXISTS `permissions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`) VALUES
+(1, 'add unit'),
+(2, 'add series');
 
 -- --------------------------------------------------------
 
@@ -305,7 +327,7 @@ CREATE TABLE IF NOT EXISTS `units` (
   `deleted_at` datetime DEFAULT NULL,
   `deleted_by` bigint(20) unsigned DEFAULT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=43 ;
 
 --
 -- Dumping data for table `units`
@@ -327,7 +349,8 @@ INSERT INTO `units` (`id`, `user_id`, `title`, `description`, `created_at`, `cre
 (16, 4, 'Machima - Internet is for Porn', 'WoW remake of an Avenue Q song', '2014-03-03 05:14:37', 0, NULL, NULL, NULL, NULL),
 (17, 4, 'How to Sharpen Knives', '', '2014-03-03 05:15:29', 0, NULL, NULL, NULL, NULL),
 (40, 4, 'Mobile App Dev', '', '2014-03-10 20:52:05', 0, NULL, NULL, NULL, NULL),
-(41, 4, 'SQL index guide', '', '2014-03-10 21:54:03', 0, NULL, NULL, NULL, NULL);
+(41, 4, 'SQL index guide', '', '2014-03-10 21:54:03', 0, NULL, NULL, NULL, NULL),
+(42, 3, 'PHP and MySQL', '', '2014-03-10 22:12:36', 2130706433, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -341,7 +364,7 @@ CREATE TABLE IF NOT EXISTS `units_subject` (
   `unit_id` bigint(20) unsigned NOT NULL,
   `subject_id` bigint(20) unsigned NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `units_subject`
@@ -370,7 +393,8 @@ INSERT INTO `units_subject` (`id`, `unit_id`, `subject_id`) VALUES
 (22, 16, 14),
 (23, 16, 8),
 (24, 17, 20),
-(43, 40, 3);
+(43, 40, 3),
+(44, 42, 3);
 
 -- --------------------------------------------------------
 
@@ -402,7 +426,6 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `status`, `facebook_id`, `google_id`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(1, 'T', 'Mui', 'sek__jai@hotmail.com', '', '', '', '', '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
 (2, 'Matthew', 'Smrke', 'msmrke@yahoo.com', '', 'active', '503406508', '', '2014-02-15 20:39:26', 2130706433, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
 (3, 'Matthew', 'Smrke', 'smrkem@gmail.com', '', 'active', '', '103178149624118788341', '2014-02-15 20:56:47', 2130706433, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
 (4, 'T', 'Mui', 'sekjaimui@gmail.com', '', 'active', '', '101135466761717121827', '2014-02-21 23:01:13', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0);
@@ -462,10 +485,32 @@ INSERT INTO `user_login_log` (`id`, `user_id`, `datetime`, `method`) VALUES
 (36, 4, '2014-03-09 11:09:01', 'google'),
 (37, 4, '2014-03-09 21:59:21', 'google'),
 (38, 4, '2014-03-10 20:27:13', 'google'),
+<<<<<<< HEAD
 (39, 4, '2014-03-15 21:23:51', 'google'),
 (40, 4, '2014-03-16 08:56:54', 'google'),
 (41, 4, '2014-03-17 04:55:15', 'google');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_permissions`
+--
+
+DROP TABLE IF EXISTS `user_permissions`;
+CREATE TABLE IF NOT EXISTS `user_permissions` (
+  `user_id` bigint(20) NOT NULL,
+  `permission_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`user_id`,`permission_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_permissions`
+--
+
+INSERT INTO `user_permissions` (`user_id`, `permission_id`) VALUES
+(3, 1),
+(3, 2),
+(4, 1);
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

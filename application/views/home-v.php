@@ -22,10 +22,8 @@
 
 <br>
 
-<?php if($this->user && $this->user->status()==='active'): ?>
+<?php if($this->user && $this->user->has_permission('add unit')): ?>
     <a href="<?php echo base_url('units/save_unit'); ?>" >Add Unit</a>
     <br />
     <a href="<?php echo base_url('series/create_series'); ?>" >Add Series</a>
 <?php endif; ?>
-
-    
