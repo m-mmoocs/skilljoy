@@ -33,6 +33,18 @@ class Units extends MY_Controller {
             $this->units_m->set_rate_down($_POST['unit_id']);
         }
         
+        if( isset($_POST['question_rate_up'])){
+            $this->units_m->save_question_rating_up($_POST);
+            header('Location:' . base_url('units/show/'.$id));
+            exit();
+        }
+        
+        if( isset($_POST['question_rate_down'])){
+            $this->units_m->save_question_rating_down($_POST);
+            header('Location:' . base_url('units/show/'.$id));
+            exit();
+        }
+        
         $this->load->model('subjects_m');
         if(!$unit=$this->units_m->get_unit_with_id($id)){
             header('Location:'.base_url());
