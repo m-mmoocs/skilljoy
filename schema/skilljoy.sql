@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2014 at 03:14 AM
+-- Generation Time: Mar 18, 2014 at 01:44 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -485,7 +485,6 @@ INSERT INTO `user_login_log` (`id`, `user_id`, `datetime`, `method`) VALUES
 (36, 4, '2014-03-09 11:09:01', 'google'),
 (37, 4, '2014-03-09 21:59:21', 'google'),
 (38, 4, '2014-03-10 20:27:13', 'google'),
-<<<<<<< HEAD
 (39, 4, '2014-03-15 21:23:51', 'google'),
 (40, 4, '2014-03-16 08:56:54', 'google'),
 (41, 4, '2014-03-17 04:55:15', 'google');
@@ -511,6 +510,7 @@ INSERT INTO `user_permissions` (`user_id`, `permission_id`) VALUES
 (3, 1),
 (3, 2),
 (4, 1);
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
