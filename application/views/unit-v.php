@@ -119,12 +119,7 @@ if($this->user && $this->user->status()==='active')
         foreach($unit->questions as $quest)
         {
            
-            echo $quest->question . ' (by '.$quest->user_name.')';
-            echo '<form action="" method="post">';
-            echo '<p> Rating: '. '<input type="hidden" name="question_id" value="'.$quest->id. '"> ';
-            echo '<input type="submit" name="question_rate_up" value="Up" /> <input type="submit" name="question_rate_down" value="Down" /><br /></p></form>';
-           
-         //  $this->smrke->Debug($unit->rating);
+            echo $quest->question . ' (by '.$quest->user_name.')  ';
             if($unit->rating[$j][0] == 0 && $unit->rating[$j][1] == 0)
             {
                echo 'Currently no one rated yet<br />'; 
@@ -133,6 +128,19 @@ if($this->user && $this->user->status()==='active')
             {
                 echo $unit->rating[$j][0].'% positive rating, ' . $unit->rating[$j][1] .'% negative rating<br />';
             }
+            
+            echo '<form action="" method="post">';
+            if($this->user && $this->user->status()==='active')
+            {
+                 echo '<p> Rating: '. '<input type="hidden" name="question_id" value="'.$quest->id. '"> ';
+                 echo '<input type="submit" name="question_rate_up" value="Up" /> <input type="submit" name="question_rate_down" value="Down" /><br /></p></form>';
+            }
+            else 
+            {
+                 echo 'Please log in to rate the current question <br />';
+            }
+           
+         //  $this->smrke->Debug($unit->rating);
             
             
             foreach($unit->answers[$i] as $ans)
