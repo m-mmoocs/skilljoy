@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 20, 2014 at 01:35 AM
+-- Generation Time: Mar 20, 2014 at 01:50 AM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -51,16 +51,7 @@ CREATE TABLE IF NOT EXISTS `completed_units` (
   `completed_at` datetime NOT NULL,
   `incomplete_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
-
---
--- Dumping data for table `completed_units`
---
-
-INSERT INTO `completed_units` (`id`, `user_id`, `unit_id`, `completed_at`, `incomplete_at`) VALUES
-(13, 4, 6, '2014-03-20 01:24:01', '2014-03-20 01:24:13'),
-(14, 4, 6, '2014-03-20 01:24:30', NULL),
-(15, 4, 8, '2014-03-20 01:34:03', NULL);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 -- --------------------------------------------------------
 

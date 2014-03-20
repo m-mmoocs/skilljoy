@@ -27,6 +27,11 @@
                 $ctr++;
             }
             echo '</table><br />';
+            if (!empty($completed_units) && (count($completed_units) >= $ctr))
+            {
+                echo '<em>Congratulations, you have completed all the units in this series!</em>';
+            }
+            echo '<br /><br />';
             if ($series->unit[$current_unit]->primary_material[0]->content_type == 1) { // -------- if it's a youtube video id
                 $this->load->view('materials/youtube-v', $series->unit[$current_unit]->primary_material[0]);
             } elseif ($series->unit[$current_unit]->primary_material[0]->content_type == 2) { // -------- if it's a pdf URL
