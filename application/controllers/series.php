@@ -11,6 +11,7 @@ class Series extends MY_Controller {
 
     public function show($id) {
         $this->load->model('series_m');
+        $this->load->model('units_m');
         $current_unit = 0;  // this is the unit (# on the series) user is currently viewing
         $series = $this->series_m->get_series_with_id($id);
 
@@ -18,11 +19,11 @@ class Series extends MY_Controller {
             $current_unit = $_POST['curr_unit'];
         }
         if (isset($_POST['mark_as_complete'])) {
-            $this->series_m->mark_unit_in_series_as_complete($series->unit[$current_unit]->id, $series->id);
+            $this->units_m->mark_unit_as_complete($series->unit[$current_unit]->id);
             $_POST['next_unit'] = 'Proceed';
         }
         if (isset($_POST['mark_as_incomplete'])) {
-            $this->series_m->mark_unit_in_series_as_incomplete($series->unit[$current_unit]->id, $series->id);
+            $this->units_m->mark_unit_as_incomplete($series->unit[$current_unit]->id);
         }
         if (isset($_POST['previous_unit']) && $current_unit != 0) {
             $current_unit--;
@@ -30,7 +31,6 @@ class Series extends MY_Controller {
         if (isset($_POST['first_unit']) && $current_unit != 0) {
             $current_unit = 0;
         }
-        
         if (isset($_POST['next_unit']) && $current_unit != count($series->unit) - 1) {
             $current_unit++;
         }

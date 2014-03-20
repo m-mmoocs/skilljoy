@@ -84,7 +84,6 @@ class Series_m extends MY_Model {
             return FALSE;
         }
     }
-
 // end function add_unit
 
     function add_series_units_relation($series_id, $units_id, $priority) {
@@ -100,7 +99,7 @@ class Series_m extends MY_Model {
     function get_units_completed_by_user_in_series($id) {
         $args = array($this->user->Data('id'), $id);
         $unit_id = array();
-        $sql = "SELECT unit_id FROM completed_units_in_series WHERE user_id = ? AND series_id = ? AND incomplete_at IS NULL";
+        $sql = "SELECT series_units.unit_id FROM completed_units INNER JOIN series_units ON completed_units.unit_id = series_units.unit_id WHERE user_id = ? AND series_id = ? AND incomplete_at IS NULL";
         $q = $this->db->query($sql, $args);
         if ($q->num_rows > 0) {
             $q = $q->result();
@@ -111,26 +110,5 @@ class Series_m extends MY_Model {
             return FALSE;
     }
 
-    function mark_unit_in_series_as_complete($unit_id, $series_id) {
-        $field_names = 'user_id,series_id,unit_id,completed_at,incomplete_at';
-        $args = array($this->user->Data('id'), $series_id, $unit_id, date('Y-m-d H:i:s', time()));
-        $sql = "INSERT INTO completed_units_in_series ($field_names) VALUES (?,?,?,?,null)";
-        if ($this->db->query($sql, $args)) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    }
-    
-    function mark_unit_in_series_as_incomplete($unit_id, $series_id) {
-        $args = array(date('Y-m-d H:i:s', time()), $unit_id, $series_id);
-        $sql = "UPDATE completed_units_in_series SET incomplete_at = ? WHERE unit_id = ? AND series_id = ?";
-        if ($this->db->query($sql, $args)) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    }
-    
 
 }

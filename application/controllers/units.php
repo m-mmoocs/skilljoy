@@ -33,6 +33,15 @@ class Units extends MY_Controller {
             $this->units_m->set_rate_down($_POST['unit_id']);
         }
         
+        if (isset($_POST['mark_as_incomplete']))
+        {
+            $this->units_m->mark_unit_as_incomplete($_POST['unit_id']);
+        }
+        
+        if (isset($_POST['mark_as_complete']))
+        {
+            $this->units_m->mark_unit_as_complete($_POST['unit_id']);
+        }
         $this->load->model('subjects_m');
         if(!$unit=$this->units_m->get_unit_with_id($id)){
             header('Location:'.base_url());
@@ -43,6 +52,10 @@ class Units extends MY_Controller {
         if ($subjects = $this->subjects_m->get_subjects_for_unit($unit->id))
         {   // ensures there are returned rows before sending to page
             $page->Data('subjects', $subjects);
+        }
+        if ($this->user->status() != 'anonymous')
+        {
+            $page->Data('completed_units', $this->units_m->get_units_completed_by_user());
         }
         $page->Data('unit', $unit);
         $page->show();

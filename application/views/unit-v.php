@@ -45,11 +45,30 @@ else
     <?php else: ?>
             <p>Log in to vote!</p>
     <?php endif; ?>        
+    <!-- show option to mark unit as complete --> 
+    <br /><br />
+    <div class="completion">
+        <?php
+    if ($this->user->status() != 'anonymous') {
+        if (!empty($completed_units) && in_array($unit->id,$completed_units))
+        {
+            echo '<em>You have completed this unit.</em><br /><input type="submit" name="mark_as_incomplete" value="Mark as Incomplete!">';
+        }
+        else if ((!empty($completed_units) && !in_array($unit->id,$completed_units)) || empty($completed_units))
+        {
+            echo '<input type="submit" name="mark_as_complete" value="Mark this Unit as Complete!">';
+        }
+    } else {
+        echo 'Log in to track progress.';
+    }
+?>
+    </div>
+<br />
     </form>
 </div>
 <br />
 <div class="unit-materials">
- 
+
 <!-- only shows primary materials --> 
     <?php foreach($unit->primary_material as $p)
     {
@@ -72,7 +91,7 @@ else
                 echo '<br /><br />';
     }    
     ?>
- 
+
 <!-- Show all the secondary materials -->
     <?php   
             foreach($unit->secondary_material as $s){

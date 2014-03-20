@@ -19,13 +19,11 @@
                 {
                     echo '<em> (completed)</em>';
                 }
-                echo '</td';
+                echo '</td>';
                 if ($ctr == $current_unit) {
                     echo '<td><em> <-- You are Here</em><td>';
-                    
                 }
                 echo '</tr>';
-                
                 $ctr++;
             }
             echo '</table><br />';
@@ -53,20 +51,20 @@
         ?>
             </td>
             <td width="300px" align="center">
-<?php
-if ($this->user->status() != 'anonymous') {
-    if (!empty($completed_units) && in_array($series->unit[$current_unit]->id,$completed_units))
-    {
-            echo '<em>You have completed this unit.</em><br /><input type="submit" name="mark_as_incomplete" value="Mark as Incomplete!">';
-    }
-    else if ((!empty($completed_units) && !in_array($series->unit[$current_unit]->id,$completed_units)) || empty($completed_units))
-    {
-        echo '<input type="submit" name="mark_as_complete" value="Mark this Unit as Complete!">';
-    }
-} else {
-    echo 'Log in to track progress.';
-}
-?>
+        <?php
+        if ($this->user->status() != 'anonymous') {
+            if (!empty($completed_units) && in_array($series->unit[$current_unit]->id,$completed_units))
+            {
+                    echo '<em>You have completed this unit.</em><br /><input type="submit" name="mark_as_incomplete" value="Mark as Incomplete!">';
+            }
+            else if ((!empty($completed_units) && !in_array($series->unit[$current_unit]->id,$completed_units)) || empty($completed_units))
+            {
+                echo '<input type="submit" name="mark_as_complete" value="Mark this Unit as Complete!">';
+            }
+        } else {
+            echo 'Log in to track progress.';
+        }
+        ?>
 
             </td>
             <td width="250px" align="center">
