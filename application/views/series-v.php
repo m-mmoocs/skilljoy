@@ -5,22 +5,16 @@
 <hr>
 <form action="" method="post">
     <div class="unit-list">
+        <h1>Units in this series:</h1>
+        
         <?php
         if (isset($series->unit)) {
             $ctr = 0;
             echo '<table>';
-            echo '<tr><td width="110px"></td><td><h1>Units in this Series</h1></td></tr>';
             foreach ($series->unit as $unit) {
                 echo '<tr>';
-                echo '<td width="110px"><a href="'.base_url('units/show/'.$unit->id).'">Link to Unit</a></td>';
-                if ($ctr == $current_unit)
-                {
-                    echo '<td>' . ($ctr + 1) . ' . ' . $unit->title ;
-                }
-                else
-                {
-                    echo '<td>' . ($ctr + 1) . ' . <a href="' . base_url('series/show/' . $series->id . '?jump_to=' . $ctr) . '">' . $unit->title . '</a></td>';
-                }
+                echo '<td width="90px"><a href="'.base_url('units/show/'.$unit->id).'">Link to Unit</a></td>';
+                echo '<td>' . ($ctr + 1) . ' . ' . $unit->title;
                 if (!empty($completed_units) && in_array($unit->id, $completed_units))
                 {
                     echo '<em> (completed)</em>';
