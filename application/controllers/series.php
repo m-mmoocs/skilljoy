@@ -38,6 +38,12 @@ class Series extends MY_Controller {
             $current_unit = count($series->unit) - 1;
         }
         
+        if (isset($_GET['jump_to']) && $_GET['jump_to'] != $current_unit)
+        {
+            $current_unit = $_GET['jump_to'];
+            
+        }
+        
         $page = new Page('series');
         if ($this->user->status() != 'anonymous')
         {
