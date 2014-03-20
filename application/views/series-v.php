@@ -71,6 +71,7 @@
             else if ((!empty($completed_units) && !in_array($series->unit[$current_unit]->id,$completed_units)) || empty($completed_units))
             {
                 echo '<input type="submit" name="mark_as_complete" value="Mark this Unit as Complete!">';
+                echo '<input type="hidden" name="current_unit_id" value="'.$series->unit[$current_unit]->id.'">';
             }
         } else {
             echo 'Log in to track progress.';
