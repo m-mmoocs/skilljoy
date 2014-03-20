@@ -12,24 +12,37 @@ class Series extends MY_Controller {
     public function show($id) {
         $this->load->model('series_m');
         $this->load->model('units_m');
-          // this is the unit (# on the series) user is currently viewing
-        $current_unit = isset($_GET['show'])?$_GET['show'] : 0;
-        
-        $this->smrke->debug($series);
-        
+        $current_unit = 0;  // this is the unit (# on the series) user is currently viewing
+        $series = $this->series_m->get_series_with_id($id);
+
+        if (isset($_POST['curr_unit'])) {
+            $current_unit = $_POST['curr_unit'];
+        }
         if (isset($_POST['mark_as_complete'])) {
-            $this->units_m->mark_unit_as_complete($_POST['current_unit_id']);
-//            $_POST['next_unit'] = 'Proceed';
-            $current_unit++
+            $this->units_m->mark_unit_as_complete($series->unit[$current_unit]->id);
+            $_POST['next_unit'] = 'Proceed';
         }
         if (isset($_POST['mark_as_incomplete'])) {
-            $this->units_m->mark_unit_as_incomplete($_POST['current_unit_id']);
+            $this->units_m->mark_unit_as_incomplete($series->unit[$current_unit]->id);
         }
-
-        // get series after updating units so it contains changes
-        $series = $this->series_m->get_series_with_id($id);
+        if (isset($_POST['previous_unit']) && $current_unit != 0) {
+            $current_unit--;
+        }
+        if (isset($_POST['first_unit']) && $current_unit != 0) {
+            $current_unit = 0;
+        }
+        if (isset($_POST['next_unit']) && $current_unit != count($series->unit) - 1) {
+            $current_unit++;
+        }
+        if (isset($_POST['last_unit']) && $current_unit != count($series->unit) - 1) {
+            $current_unit = count($series->unit) - 1;
+        }
         
-        
+        if (isset($_GET['jump_to']) && $_GET['jump_to'] != $current_unit)
+        {
+            $current_unit = $_GET['jump_to'];
+            
+        }
         
         $page = new Page('series');
         if ($this->user->status() != 'anonymous')
