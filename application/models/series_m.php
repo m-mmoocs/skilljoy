@@ -34,7 +34,7 @@ class Series_m extends MY_Model {
 
     public function get_units_with_series_id($id) {
         $unit = array();
-        $sql = "SELECT unit_id FROM series_units WHERE series_id = ? AND deleted_at IS NULL";
+        $sql = "SELECT unit_id FROM series_units WHERE series_id = ? AND deleted_at IS NULL ORDER BY priority";
         $q = $this->db->query($sql, $id);
         if ($q->num_rows > 0) {
             $q = $q->result();
