@@ -9,7 +9,7 @@ class Questions_m extends MY_Model{
 	}
         
 	public function get_question_with_unit_id($id){
-            $sql = "SELECT *,questions.id, users.firstname AS user_name FROM questions INNER JOIN users ON questions.user_id = users.id WHERE unit_id = ? ";
+            $sql = "SELECT *,questions.id, users.firstname AS user_name FROM questions INNER JOIN users ON questions.user_id = users.id WHERE unit_id = ? ORDER BY questions.id";
             $q = $this->db->query($sql,$id);
             $q = $q->result();
             return $q;
@@ -60,12 +60,11 @@ class Questions_m extends MY_Model{
         
      public function get_rating_with_unit_id($id)
      {
-            $sql = "SELECT * FROM questions WHERE unit_id = ?";
+            $sql = "SELECT * FROM questions WHERE unit_id = ? ORDER BY questions.id";
             $q = $this->db->query($sql,$id);
             if($q->num_rows >= 1){
                 $q = $q->result();
                 $q3= array();
-             
                 foreach($q as $q2)
                 {
                   // array_push($q3, $this->get_question_rating_total($q2->id),$this->get_question_rating_up($q2->id));
@@ -73,7 +72,6 @@ class Questions_m extends MY_Model{
                     $s = $this->rating_calculation($q2->id);
                     array_push($q3, $s);
                 }
-               
                 return $q3;
             
             }

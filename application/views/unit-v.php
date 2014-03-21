@@ -34,9 +34,9 @@ else
     <?php endif; ?>
     <?php if($this->user && $this->user->status()==='active'): ?>
         Rate this unit: 
-            <input type="submit" name="rate_down" value="Down">
             <input type="submit" name="rate_up" value="Up">
-        
+            <input type="submit" name="rate_down" value="Down">
+            
     <?php else: ?>
             <p>Log in to vote!</p>
     <?php endif; ?>        
@@ -115,6 +115,7 @@ if($this->user && $this->user->status()==='active')
         {
            
             echo $quest->question . ' (by '.$quest->user_name.')  ';
+            //<<<<<<<<<<<<<<<<<<<<<$this->smrke->Debug($unit->rating);
             if($unit->rating[$j][0] == 0 && $unit->rating[$j][1] == 0)
             {
                echo 'Currently no one rated yet<br />'; 

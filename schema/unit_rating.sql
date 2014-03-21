@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `unit_rating`
 --
-
+DROP TABLE IF EXISTS `unit_rating`;
 CREATE TABLE IF NOT EXISTS `unit_rating` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
