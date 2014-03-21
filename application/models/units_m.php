@@ -28,9 +28,7 @@ class Units_m extends MY_Model{
                 $this->load->model('questions_m');
                 $unit->questions = $this->questions_m->get_question_with_unit_id($unit->id);
                 $unit->answers = $this->questions_m->get_answer_with_unit_id($unit->id);
-                //$this->load->model('rating_m');
                 $unit->rating = $this->questions_m->get_rating_with_unit_id($unit->id);
-               // $this->smrke->Debug($unit->rating);
                 return $unit;
             }
             else return FALSE;
@@ -221,7 +219,6 @@ class Units_m extends MY_Model{
         {
             $this->load->model('questions_m');
             $args = array('question_id'=> $arr['question_id'],'user_id'=> $this->user->Data('id'));
-           // $this->smrke->Debug($args['user_id']);
             $check = $this->questions_m->rating_check_conflicts($args['question_id'],$args['user_id']);
             if($check == null)
             {

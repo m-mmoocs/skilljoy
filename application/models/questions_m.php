@@ -100,7 +100,6 @@ class Questions_m extends MY_Model{
          $sql = "SELECT COUNT(rating) as negative_total FROM question_rating WHERE question_id=? AND rating='-1'";
          $q = $this->db->query($sql,$question_id);
          $q = $q->result();
-        //$this->smrke->Debug($q);
          return $q[0]->negative_total;   
      }
      
@@ -127,12 +126,10 @@ class Questions_m extends MY_Model{
      
      public function rating_check_conflicts($question_id , $user_id)
      {
-          //$this->smrke->Debug($args);
          $args = array($question_id, $user_id);
          $sql = "SELECT id FROM question_rating WHERE question_id = ? AND user_id = ?";
          $q = $this->db->query($sql,$args);
          $q = $q->result();
-         //$this->smrke->Debug($q);
          return $q;
      }
         

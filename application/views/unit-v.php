@@ -140,9 +140,6 @@ if($this->user && $this->user->status()==='active')
                  echo 'Please log in to rate the current question <br />';
             }
            
-         //  $this->smrke->Debug($unit->rating);
-            
-            
             foreach($unit->answers[$i] as $ans)
             {   
                     echo 'A: ' . $ans->answers . ' (by '.$ans->user_name .')<br/>';
