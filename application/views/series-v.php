@@ -3,7 +3,7 @@
 
 <p  class="series-description"><?php echo nl2br(ucfirst($series->description)); ?></p>
 <hr>
-<form action="" method="post">
+<form action="<?php echo base_url('series/show/'.$series->id); ?>" method="post">
     <div class="unit-list">
         <?php
         if (isset($series->unit)) {
@@ -23,9 +23,9 @@
                 }
                 if (!empty($completed_units) && in_array($unit->id, $completed_units))
                 {
-                    echo '<em> (completed)</em>';
+                    echo '<td><em> (completed)</em></td>';
                 }
-                echo '</td>';
+                
                 if ($ctr == $current_unit) {
                     echo '<td><em> <-- You are Here</em><td>';
                 }

@@ -17,7 +17,11 @@ class Series extends MY_Controller {
 
         if (isset($_POST['curr_unit'])) {
             $current_unit = $_POST['curr_unit'];
+        }elseif (isset($_GET['jump_to']) && $_GET['jump_to'] != $current_unit)
+        {
+            $current_unit = $_GET['jump_to'];
         }
+        
         if (isset($_POST['mark_as_complete'])) {
             $this->units_m->mark_unit_as_complete($series->unit[$current_unit]->id);
             $_POST['next_unit'] = 'Proceed';
@@ -36,12 +40,6 @@ class Series extends MY_Controller {
         }
         if (isset($_POST['last_unit']) && $current_unit != count($series->unit) - 1) {
             $current_unit = count($series->unit) - 1;
-        }
-        
-        if (isset($_GET['jump_to']) && $_GET['jump_to'] != $current_unit)
-        {
-            $current_unit = $_GET['jump_to'];
-            
         }
         
         $page = new Page('series');
