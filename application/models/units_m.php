@@ -155,7 +155,7 @@ class Units_m extends MY_Model{
         {  // this returns 1 if user has rated up, -1 if user has rated down, 0 if nothing was rated
             $status = array();
             $args = array('user_id' => $this->user->Data('id'),'unit_id' => $id,);
-            $sql = "SELECT * FROM rating WHERE user_id = ? AND unit_id = ?";
+            $sql = "SELECT * FROM unit_rating WHERE user_id = ? AND unit_id = ?";
             $q = $this->db->query($sql,$args); 
             if ($q->num_rows == 0)  // if no results came up, then user hasn't rated the unit
             { return 0; }
@@ -168,7 +168,7 @@ class Units_m extends MY_Model{
         
         public function positive_ratings_for_unit($id)
         {   // this returns the number of positive ratings
-            $sql = "SELECT COUNT(*) AS positive FROM rating WHERE unit_id = ? AND rating = '1'";
+            $sql = "SELECT COUNT(*) AS positive FROM unit_rating WHERE unit_id = ? AND rating = '1'";
             $q = $this->db->query($sql, $id);
             $q = $q->result();
             return ($q[0]->positive);
@@ -176,7 +176,7 @@ class Units_m extends MY_Model{
         
         public function total_ratings_for_unit($id)
         {   // this returns the total number of times this unit has been voted on
-            $sql = "SELECT COUNT(*) AS total FROM rating WHERE unit_id = ?";
+            $sql = "SELECT COUNT(*) AS total FROM unit_rating WHERE unit_id = ?";
             $q = $this->db->query($sql, $id);
             $q = $q->result();
             return ($q[0]->total);
@@ -188,9 +188,9 @@ class Units_m extends MY_Model{
             $curr_rating = $this->user_has_rated_unit($id);
             if ($curr_rating == 0) // if no rating exists
             {
-                $sql = "INSERT INTO rating (user_id, unit_id, rating) VALUES (?, ?, '1')";
+                $sql = "INSERT INTO unit_rating (user_id, unit_id, rating) VALUES (?, ?, '1')";
             } else {// otherwise the user had rated down (rated up can't be accessed twice because option not available)
-                $sql = "UPDATE rating SET rating = '1' WHERE user_id = ? AND unit_id = ?";
+                $sql = "UPDATE unit_rating SET rating = '1' WHERE user_id = ? AND unit_id = ?";
             }
             $this->db->query($sql, $args);
         }
@@ -201,9 +201,9 @@ class Units_m extends MY_Model{
             $curr_rating = $this->user_has_rated_unit($id);
             if ($curr_rating == 0) // if no rating exists
             {
-                $sql = "INSERT INTO rating (user_id, unit_id, rating) VALUES (?, ?, '-1')";
+                $sql = "INSERT INTO unit_rating (user_id, unit_id, rating) VALUES (?, ?, '-1')";
             } else {// this sets up rating to -1
-                $sql = "UPDATE rating SET rating = '-1' WHERE user_id = ? AND unit_id = ?";
+                $sql = "UPDATE unit_rating SET rating = '-1' WHERE user_id = ? AND unit_id = ?";
             }
             $this->db->query($sql, $args);
         }
