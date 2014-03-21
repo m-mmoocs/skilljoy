@@ -34,14 +34,9 @@ else
     <?php endif; ?>
     <?php if($this->user && $this->user->status()==='active'): ?>
         Rate this unit: 
-        <?php if ($unit->rate_status['has_rated'] == 1): ?>
             <input type="submit" name="rate_down" value="Down">
-        <?php elseif ($unit->rate_status['has_rated'] == -1): ?>
             <input type="submit" name="rate_up" value="Up">
-        <?php else: ?>
-            <input type="submit" name="rate_up" value="Up">
-            <input type="submit" name="rate_down" value="Down">
-        <?php endif; ?>
+        
     <?php else: ?>
             <p>Log in to vote!</p>
     <?php endif; ?>        

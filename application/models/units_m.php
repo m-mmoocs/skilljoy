@@ -196,10 +196,9 @@ class Units_m extends MY_Model{
             if ($curr_rating == 0) // if no rating exists
             {
                 $sql = "INSERT INTO unit_rating (user_id, unit_id, rating) VALUES (?, ?, '1')";
-            } else {// otherwise the user had rated down (rated up can't be accessed twice because option not available)
-                $sql = "UPDATE unit_rating SET rating = '1' WHERE user_id = ? AND unit_id = ?";
-            }
-            $this->db->query($sql, $args);
+                $this->db->query($sql, $args);
+            } 
+                        
         }
         
         public function set_rate_down($id)
@@ -209,10 +208,9 @@ class Units_m extends MY_Model{
             if ($curr_rating == 0) // if no rating exists
             {
                 $sql = "INSERT INTO unit_rating (user_id, unit_id, rating) VALUES (?, ?, '-1')";
-            } else {// this sets up rating to -1
-                $sql = "UPDATE unit_rating SET rating = '-1' WHERE user_id = ? AND unit_id = ?";
+                $this->db->query($sql, $args);
             }
-            $this->db->query($sql, $args);
+            
         }
         
         public function save_question_rating_up($arr)
