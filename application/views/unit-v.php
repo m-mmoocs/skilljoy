@@ -30,18 +30,13 @@ else
     <?php if ($unit->rate_status['total_rates'] == 0): ?>
         <p>This unit has not been voted on!</p>
     <?php else: ?>
-        <p>This unit has a rating of <?php echo $unit->rate_status['percentage']; ?>% positive votes out of <?php echo $unit->rate_status['total_rates']; ?> votes.</p>
+        <p> <?php echo $unit->rate_status['positive']; ?>% positive rating,  <?php echo $unit->rate_status['negative']; ?>% negative rating.</p>
     <?php endif; ?>
     <?php if($this->user && $this->user->status()==='active'): ?>
         Rate this unit: 
-        <?php if ($unit->rate_status['has_rated'] == 1): ?>
-            <input type="submit" name="rate_down" value="Down">
-        <?php elseif ($unit->rate_status['has_rated'] == -1): ?>
-            <input type="submit" name="rate_up" value="Up">
-        <?php else: ?>
             <input type="submit" name="rate_up" value="Up">
             <input type="submit" name="rate_down" value="Down">
-        <?php endif; ?>
+            
     <?php else: ?>
             <p>Log in to vote!</p>
     <?php endif; ?>        
@@ -134,18 +129,40 @@ if($this->user && $this->user->status()==='active')
 <?php
         echo '<p>Posted Questions</p><br />';
         $i = 0;
+        $j = 0;
         foreach($unit->questions as $quest)
         {
+           
+            echo $quest->question . ' (by '.$quest->user_name.')  ';
+            if($unit->rating[$j][0] == 0 && $unit->rating[$j][1] == 0)
+            {
+               echo 'Currently no one rated yet<br />'; 
+            }
+            else
+            {
+                echo $unit->rating[$j][0].'% positive rating, ' . $unit->rating[$j][1] .'% negative rating<br />';
+            }
             
-            echo $quest->question . ' (by '.$quest->user_name.')<br />';
+            echo '<form action="" method="post">';
+            if($this->user && $this->user->status()==='active')
+            {
+                 echo '<p> Rating: '. '<input type="hidden" name="question_id" value="'.$quest->id. '"> ';
+                 echo '<input type="submit" name="question_rate_up" value="Up" /> <input type="submit" name="question_rate_down" value="Down" /><br /></p></form>';
+            }
+            else 
+            {
+                 echo 'Please log in to rate the current question <br />';
+            }
+           
             foreach($unit->answers[$i] as $ans)
             {   
                     echo 'A: ' . $ans->answers . ' (by '.$ans->user_name .')<br/>';
             }
             
-            echo '<form action="" method="post">';
+            
             if($this->user && $this->user->status()==='active')
             { 
+                echo '<form action="" method="post">';
                 echo '<p><input type="hidden" name="question_id" value="'.$quest->id. '"> <input type ="text" name="answers"  > '; 
                 echo '<input type="submit" name="add_answers" value="Reply"><br /></p></form>';
 
@@ -155,6 +172,7 @@ if($this->user && $this->user->status()==='active')
             }
             echo '<br />';
             $i++;
+            $j++;
         }
 ?>
 </div>
