@@ -34,7 +34,7 @@ class Subjects_m extends MY_Model{
             }
         }
         
-        public function get_units_for_subject($id) {
+        public function get_units_for_subject($id) {    // this returns a list of unit id for that subject
             $sql = "SELECT units.id, subjects.name FROM units "
                     . "INNER JOIN units_subject ON units.id = units_subject.unit_id "
                     . "INNER JOIN subjects ON units_subject.subject_id = subjects.id "

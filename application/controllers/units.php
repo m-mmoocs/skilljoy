@@ -45,6 +45,16 @@ class Units extends MY_Controller {
             exit();
         }
         
+        if (isset($_POST['mark_as_incomplete']))
+        {
+            $this->units_m->mark_unit_as_incomplete($_POST['unit_id']);
+        }
+        
+        if (isset($_POST['mark_as_complete']))
+        {
+            $this->units_m->mark_unit_as_complete($_POST['unit_id']);
+        }
+
         $this->load->model('subjects_m');
         if(!$unit=$this->units_m->get_unit_with_id($id)){
             header('Location:'.base_url());
@@ -55,6 +65,10 @@ class Units extends MY_Controller {
         if ($subjects = $this->subjects_m->get_subjects_for_unit($unit->id))
         {   // ensures there are returned rows before sending to page
             $page->Data('subjects', $subjects);
+        }
+        if ($this->user->status() != 'anonymous')
+        {
+            $page->Data('completed_units', $this->units_m->get_units_completed_by_user());
         }
         $page->Data('unit', $unit);
         $page->show();
@@ -72,7 +86,7 @@ class Units extends MY_Controller {
         }
 
         if (isset($_POST['add_unit'])) {  // if user has clicked the Save button
-            if ($this->chk_form()) {      // if the form has been validated
+            if ($this->chk_add_unit_form()) {      // if the form has been validated
                 $this->extract_id();    // call function to extract video IDs
                 $this->units_m->save_unit($_POST);
                 header('Location:' . base_url());
@@ -110,7 +124,7 @@ class Units extends MY_Controller {
         }
     }
 
-    public function chk_form() {      // returns true/false
+    public function chk_add_unit_form() {      // returns true/false
         $this->load->library('form_validation');
 
         $this->fix_url();   // add http:// to content if it hasn't already been added

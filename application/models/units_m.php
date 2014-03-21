@@ -131,6 +131,42 @@ class Units_m extends MY_Model{
             return $this->db->query($sql,array(date('',time()),  ip2long($_SERVER['REMOTE_ADDR']),$id));            
         } // end function delete_unit
         
+        public function get_units_completed_by_user()
+        {
+            $unit_id = array();
+            $sql = "SELECT unit_id FROM completed_units WHERE user_id = ? AND incomplete_at IS NULL";
+            $q = $this->db->query($sql, $this->user->Data('id'));
+            if ($q->num_rows > 0) {
+                $q = $q->result();
+                foreach ($q as $u)
+                    $unit_id[] = $u->unit_id;
+                return $unit_id;
+            } else
+                return FALSE;
+        }
+        
+        function mark_unit_as_complete($unit_id) {
+            $field_names = 'user_id,unit_id,completed_at,incomplete_at';
+            $args = array($this->user->Data('id'), $unit_id, date('Y-m-d H:i:s', time()));
+            $sql = "INSERT INTO completed_units ($field_names) VALUES (?,?,?,null)";
+            if ($this->db->query($sql, $args)) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    
+        function mark_unit_as_incomplete($unit_id) {
+            // this just marks the incomplete time, rather than removing the entry
+            $args = array(date('Y-m-d H:i:s', time()), $unit_id);
+            $sql = "UPDATE completed_units SET incomplete_at = ? WHERE unit_id = ?";
+            if ($this->db->query($sql, $args)) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+        
         public function rating_info_for_unit($id)   // this calls the following 3 functions and returns the package to controller
         {
             $stats = array();
