@@ -134,7 +134,6 @@ if($this->user && $this->user->status()==='active')
         {
            
             echo $quest->question . ' (by '.$quest->user_name.')  ';
-            //<<<<<<<<<<<<<<<<<<<<<$this->smrke->Debug($unit->rating);
             if($unit->rating[$j][0] == 0 && $unit->rating[$j][1] == 0)
             {
                echo 'Currently no one rated yet<br />'; 
