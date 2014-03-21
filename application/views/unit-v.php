@@ -30,7 +30,7 @@ else
     <?php if ($unit->rate_status['total_rates'] == 0): ?>
         <p>This unit has not been voted on!</p>
     <?php else: ?>
-        <p>This unit has a rating of <?php echo $unit->rate_status['percentage']; ?>% positive votes out of <?php echo $unit->rate_status['total_rates']; ?> votes.</p>
+        <p> <?php echo $unit->rate_status['positive']; ?>% positive rating,  <?php echo $unit->rate_status['negative']; ?> negative rating.</p>
     <?php endif; ?>
     <?php if($this->user && $this->user->status()==='active'): ?>
         Rate this unit: 

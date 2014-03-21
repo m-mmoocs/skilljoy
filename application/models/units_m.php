@@ -143,7 +143,8 @@ class Units_m extends MY_Model{
             $stats['total_rates'] = $this->total_ratings_for_unit($id);          // get the total times this unit has been voted on
             if ($stats['total_rates'] > 0)                  // avoids a divide by zero if unit has never been rated
             {                                               // then gets the percentage of positive votes versus total votes
-                $stats['percentage'] = round(($this->positive_ratings_for_unit($id)/$stats['total_rates'])*100);
+                $stats['positive'] = round(($this->positive_ratings_for_unit($id)/$stats['total_rates'])*100);
+                $stats['negative'] = round(($this->negative_ratings_for_unit($id)/$stats['total_rates'])*100);
             } else {
                 $stats['percentage'] = 0;                   // or set percentage to zero if there's been no votes
             }
@@ -172,6 +173,14 @@ class Units_m extends MY_Model{
             $q = $this->db->query($sql, $id);
             $q = $q->result();
             return ($q[0]->positive);
+        }
+        
+        public function negative_ratings_for_unit($id)
+        {
+             $sql = "SELECT COUNT(*) AS negative FROM unit_rating WHERE unit_id = ? AND rating = '-1'";
+            $q = $this->db->query($sql, $id);
+            $q = $q->result();
+            return ($q[0]->negative);
         }
         
         public function total_ratings_for_unit($id)
