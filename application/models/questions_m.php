@@ -67,8 +67,6 @@ class Questions_m extends MY_Model{
                 $q3= array();
                 foreach($q as $q2)
                 {
-                  // array_push($q3, $this->get_question_rating_total($q2->id),$this->get_question_rating_up($q2->id));
-                  // array_push($q3, $this->get_question_rating_up($q2->id));
                     $s = $this->rating_calculation($q2->id);
                     array_push($q3, $s);
                 }
@@ -119,7 +117,7 @@ class Questions_m extends MY_Model{
          }
          array_push($cal_arr, $p_cal);
          array_push($cal_arr,$n_cal);
-         return ($cal_arr); //array[0] is the total for positive votes , array[1] is the total for negative votes
+         return ($cal_arr); //array[0] is the % for positive votes , array[1] is the % for negative votes
      }
      
      public function rating_check_conflicts($question_id , $user_id)
