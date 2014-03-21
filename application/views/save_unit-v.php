@@ -6,7 +6,7 @@
     <input type="text" name="title" value="<?php if (isset($_POST['title'])) echo ($_POST['title']); ?>"><?php if (isset($_POST['add_unit'])) echo form_error('title');?>
     
     <br><br>
-    <label for="title">Description: </label>
+    <label for="description">Description: </label>
     <textarea name="description" rows="5" cols="60"><?php if (isset($_POST['description'])) echo ($_POST['description']); ?></textarea>
     <br><br>
     <p>Materials:</p>
