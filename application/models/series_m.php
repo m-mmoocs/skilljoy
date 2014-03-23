@@ -15,6 +15,12 @@ class Series_m extends MY_Model {
         return $q->result();
     }
 
+    public function get_all_series_with_user_id($id) {
+        $sql = "SELECT * FROM series WHERE user_id = ? AND deleted_at IS NULL";
+        $q = $this->db->query($sql, $id);
+        return $q->result();
+    }
+    
     public function get_series_with_id($id) {
         $this->load->model('units_m');
         $sql = "SELECT * FROM series WHERE id = ? AND deleted_at IS NULL";
@@ -29,6 +35,8 @@ class Series_m extends MY_Model {
                 }
             }
         }
+        $this->load->model('user_m');
+        $series->user = $this->user_m->get_user_with_id($series->user_id);
         return $series;
     }
 

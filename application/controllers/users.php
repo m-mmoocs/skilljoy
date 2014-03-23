@@ -6,6 +6,18 @@ class Users extends MY_Controller{
             
 	}
         
+        public function show($id)
+        {
+            $this->load->model('units_m');
+            $this->load->model('user_m');
+            $this->load->model('series_m');
+            $page = new Page('user');
+            $page->Data('user', $this->user_m->get_user_with_id($id));
+            $page->Data('series', $this->series_m->get_all_series_with_user_id($id));
+            $page->Data('unit', $this->units_m->get_all_units_with_user_id($id));
+            $page->show();
+        }
+        
         public function login(){
             $this->load->library('Fbconnect');	
             $this->load->library('Gconnect');

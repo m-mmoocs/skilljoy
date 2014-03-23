@@ -63,6 +63,13 @@ class User_m extends MY_Model{
             return $this->db->query($sql,$a);    
         }
         
+        public function add_username($input)
+        {
+            $args = array($input, $this->user->Data('id'));
+            $sql = "UPDATE users SET user_name = ? WHERE id = ?";
+            return $this->db->query($sql,$args);    
+        }
+        
         public function delete_user($id){
             $sql = "UPDATE users SET deleted_at = ?, deleted_by = ? WHERE id = ?";
             return $this->db->query($sql,array(date('',time()),  ip2long($_SERVER['REMOTE_ADDR']),$id));

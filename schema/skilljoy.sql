@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 20, 2014 at 01:50 AM
+-- Generation Time: Mar 23, 2014 at 12:16 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -35,7 +35,15 @@ CREATE TABLE IF NOT EXISTS `answers` (
   `answers` varchar(300) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `answers`
+--
+
+INSERT INTO `answers` (`id`, `question_id`, `answers`, `user_id`) VALUES
+(1, 1, 'answer this mofo', 4),
+(2, 1, 'another answer', 4);
 
 -- --------------------------------------------------------
 
@@ -51,7 +59,21 @@ CREATE TABLE IF NOT EXISTS `completed_units` (
   `completed_at` datetime NOT NULL,
   `incomplete_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `completed_units`
+--
+
+INSERT INTO `completed_units` (`id`, `user_id`, `unit_id`, `completed_at`, `incomplete_at`) VALUES
+(1, 4, 8, '2014-03-21 00:32:52', '2014-03-21 01:18:53'),
+(2, 4, 16, '2014-03-21 00:33:01', NULL),
+(3, 4, 2, '2014-03-21 00:33:07', NULL),
+(4, 4, 11, '2014-03-21 00:33:13', '2014-03-21 01:19:50'),
+(5, 4, 10, '2014-03-21 00:33:14', '2014-03-21 01:19:35'),
+(6, 4, 11, '2014-03-21 01:18:59', '2014-03-21 01:19:50'),
+(7, 4, 11, '2014-03-21 01:19:02', '2014-03-21 01:19:50'),
+(8, 4, 11, '2014-03-21 01:19:05', '2014-03-21 01:19:50');
 
 -- --------------------------------------------------------
 
@@ -161,7 +183,39 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `question` varchar(300) NOT NULL,
   `user_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id`, `unit_id`, `question`, `user_id`) VALUES
+(1, 1, 'Blah blah blah', 4),
+(2, 1, 'blu blu bl;', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_rating`
+--
+
+DROP TABLE IF EXISTS `question_rating`;
+CREATE TABLE IF NOT EXISTS `question_rating` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `question_id` int(11) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `rating` enum('1','-1','','') NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `question_id_2` (`question_id`,`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `question_rating`
+--
+
+INSERT INTO `question_rating` (`id`, `question_id`, `user_id`, `rating`) VALUES
+(1, 1, 4, '1'),
+(2, 2, 4, '-1');
 
 -- --------------------------------------------------------
 
@@ -391,12 +445,35 @@ INSERT INTO `units_subject` (`id`, `unit_id`, `subject_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `unit_rating`
+--
+
+DROP TABLE IF EXISTS `unit_rating`;
+CREATE TABLE IF NOT EXISTS `unit_rating` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `unit_id` bigint(20) NOT NULL,
+  `rating` enum('-1','1') NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `unit_rating`
+--
+
+INSERT INTO `unit_rating` (`id`, `user_id`, `unit_id`, `rating`) VALUES
+(1, 4, 1, '-1');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(50) NOT NULL,
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `email` varchar(250) NOT NULL,
@@ -417,10 +494,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `password`, `status`, `facebook_id`, `google_id`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(2, 'Matthew', 'Smrke', 'msmrke@yahoo.com', '', 'active', '503406508', '', '2014-02-15 20:39:26', 2130706433, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
-(3, 'Matthew', 'Smrke', 'smrkem@gmail.com', '', 'active', '', '103178149624118788341', '2014-02-15 20:56:47', 2130706433, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
-(4, 'T', 'Mui', 'sekjaimui@gmail.com', '', 'active', '', '101135466761717121827', '2014-02-21 23:01:13', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0);
+INSERT INTO `users` (`id`, `user_name`, `firstname`, `lastname`, `email`, `password`, `status`, `facebook_id`, `google_id`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
+(2, '', 'Matthew', 'Smrke', 'msmrke@yahoo.com', '', 'active', '503406508', '', '2014-02-15 20:39:26', 2130706433, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
+(3, '', 'Matthew', 'Smrke', 'smrkem@gmail.com', '', 'active', '', '103178149624118788341', '2014-02-15 20:56:47', 2130706433, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0),
+(4, 'tmui', 'T', 'Mui', 'sekjaimui@gmail.com', '', 'active', '', '101135466761717121827', '2014-02-21 23:01:13', 0, '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -435,7 +512,7 @@ CREATE TABLE IF NOT EXISTS `user_login_log` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `method` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `user_login_log`
@@ -480,7 +557,11 @@ INSERT INTO `user_login_log` (`id`, `user_id`, `datetime`, `method`) VALUES
 (39, 4, '2014-03-15 21:23:51', 'google'),
 (40, 4, '2014-03-16 08:56:54', 'google'),
 (41, 4, '2014-03-17 04:55:15', 'google'),
-(42, 4, '2014-03-20 00:42:54', 'google');
+(42, 4, '2014-03-20 00:42:54', 'google'),
+(43, 4, '2014-03-21 00:32:49', 'google'),
+(44, 4, '2014-03-23 10:38:56', 'google'),
+(45, 4, '2014-03-23 10:46:27', 'google'),
+(46, 4, '2014-03-23 12:12:48', 'google');
 
 -- --------------------------------------------------------
 

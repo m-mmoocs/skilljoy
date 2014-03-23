@@ -1,3 +1,14 @@
+    <?php if ($this->user->status() != 'anonymous' && isset($has_username) && $has_username == false) : ?>
+        <div id="request-username">
+            <form action="" method="POST">
+                <label for="new_username">You have not entered a username. You can enter one now:</label>
+                <input type="text" name="new_username" value="<?php if (isset($_POST['new_username'])) echo ($_POST['new_username']); ?>"><?php if (isset($_POST['add_username'])) echo form_error('new_username');?>
+                <input type="submit" name="add_username" value="Create Username">
+            </form>
+            <br />
+            <br />
+        </div>
+    <?php endif; ?>
 <h2>Series</h2>
 <?php if(count($series)>0): ?>
 <?php foreach($series as $s): ?>

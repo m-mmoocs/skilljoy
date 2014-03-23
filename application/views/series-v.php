@@ -1,5 +1,4 @@
-
-<h2 class="series-title"><?php echo ucwords($series->title); ?></h2>
+<h2 class="series-title"><?php echo ucwords($series->title); ?><?php if(!empty($series->user['user_name'])) echo ' by <a href="'.base_url('users/show/'.$series->user['id']).'">' . $series->user['user_name'] . '</a>';?> </h2>
 
 <p  class="series-description"><?php echo nl2br(ucfirst($series->description)); ?></p>
 <hr>

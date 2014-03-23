@@ -14,6 +14,13 @@ class Units_m extends MY_Model{
             return $q->result();
         }
         
+        public function get_all_units_with_user_id($id)
+        {
+            $sql = "SELECT * FROM units WHERE user_id = ? AND deleted_at IS NULL";
+            $q = $this->db->query($sql,$id);
+            return $q->result();
+        }
+        
         public function get_unit_with_id($id){
             $sql = "SELECT * FROM units WHERE id = ? AND deleted_at IS NULL";
             $q = $this->db->query($sql,$id);
@@ -28,6 +35,8 @@ class Units_m extends MY_Model{
                 $this->load->model('questions_m');
                 $unit->questions = $this->questions_m->get_question_with_unit_id($unit->id);
                 $unit->answers = $this->questions_m->get_answer_with_unit_id($unit->id);
+                $this->load->model('user_m');
+                $unit->user = $this->user_m->get_user_with_id($unit->user_id);
                 return $unit;
             }
             else return FALSE;
