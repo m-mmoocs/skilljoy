@@ -57,4 +57,14 @@ class MY_Form_validation extends CI_Form_validation {
         }
     }
 
+    function is_alphanumeric($input)
+    {
+        $ci = &get_instance();
+        $ci->load->library('mui');
+        if ($ci->mui->is_alphanumeric($input)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 }

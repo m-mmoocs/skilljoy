@@ -2,7 +2,7 @@
 
 ?>
 
-<h2 class="unit-title"><?php echo ucwords($unit->title); ?></h2>
+<h2 class="unit-title"><?php echo ucwords($unit->title); ?><?php if(!empty($unit->user['user_name'])) echo ' by <a href="'.base_url('users/show/'.$unit->user['id']).'">' . $unit->user['user_name'] . '</a>';?> </h2>
 
 <p  class="unit-description"><?php echo nl2br(ucfirst($unit->description)); ?></p>
 
