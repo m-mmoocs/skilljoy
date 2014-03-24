@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 24, 2014 at 08:26 AM
+-- Generation Time: Mar 24, 2014 at 07:22 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -77,36 +77,6 @@ INSERT INTO `completed_units` (`id`, `user_id`, `unit_id`, `completed_at`, `inco
 (6, 4, 11, '2014-03-21 01:18:59', '2014-03-21 01:19:50'),
 (7, 4, 11, '2014-03-21 01:19:02', '2014-03-21 01:19:50'),
 (8, 4, 11, '2014-03-21 01:19:05', '2014-03-21 01:19:50');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `completed_units_in_series`
---
-
-DROP TABLE IF EXISTS `completed_units_in_series`;
-CREATE TABLE IF NOT EXISTS `completed_units_in_series` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `series_id` bigint(20) NOT NULL,
-  `unit_id` bigint(20) NOT NULL,
-  `completed_at` datetime NOT NULL,
-  `incomplete_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
-
---
--- Dumping data for table `completed_units_in_series`
---
-
-INSERT INTO `completed_units_in_series` (`id`, `user_id`, `series_id`, `unit_id`, `completed_at`, `incomplete_at`) VALUES
-(15, 4, 5, 10, '2014-03-17 06:47:41', '2014-03-17 06:47:45'),
-(16, 4, 5, 10, '2014-03-17 06:47:46', NULL),
-(17, 4, 5, 40, '2014-03-17 06:47:50', '2014-03-17 06:52:11'),
-(18, 4, 5, 6, '2014-03-17 06:50:12', NULL),
-(19, 4, 5, 6, '2014-03-17 06:50:36', NULL),
-(20, 4, 5, 6, '2014-03-17 06:51:31', NULL),
-(21, 4, 5, 6, '2014-03-17 06:51:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -264,32 +234,6 @@ INSERT INTO `question_rating` (`id`, `question_id`, `user_id`, `rating`) VALUES
 (12, 6, 1, '1'),
 (13, 6, 2, '1'),
 (14, 4, 0, '1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rating`
---
-
-DROP TABLE IF EXISTS `rating`;
-CREATE TABLE IF NOT EXISTS `rating` (
-  `key` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `unit_id` bigint(20) NOT NULL,
-  `rating` enum('-1','1') NOT NULL,
-  PRIMARY KEY (`key`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
-
---
--- Dumping data for table `rating`
---
-
-INSERT INTO `rating` (`key`, `user_id`, `unit_id`, `rating`) VALUES
-(9, 4, 1, '-1'),
-(10, 4, 6, '1'),
-(11, 4, 18, '-1'),
-(12, 4, 7, '1'),
-(13, 4, 19, '1');
 
 -- --------------------------------------------------------
 
@@ -548,7 +492,7 @@ CREATE TABLE IF NOT EXISTS `user_login_log` (
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `method` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=44 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=45 ;
 
 --
 -- Dumping data for table `user_login_log`
@@ -594,7 +538,8 @@ INSERT INTO `user_login_log` (`id`, `user_id`, `datetime`, `method`) VALUES
 (40, 3, '2014-03-16 02:56:58', 'google'),
 (41, 3, '2014-03-16 03:03:09', 'google'),
 (42, 5, '2014-03-21 02:54:43', 'google'),
-(43, 4, '2014-03-24 08:25:55', 'google');
+(43, 4, '2014-03-24 08:25:55', 'google'),
+(44, 4, '2014-03-24 19:20:45', 'google');
 
 -- --------------------------------------------------------
 
