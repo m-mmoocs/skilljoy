@@ -190,6 +190,7 @@ class Units_m extends MY_Model{
                 $stats['negative'] = round(($this->negative_ratings_for_unit($id)/$stats['total_rates'])*100);
             } else {
                 $stats['percentage'] = 0;                   // or set percentage to zero if there's been no votes
+                $stats['positive'] =0;
             }
             return $stats;                                  // send all the info back to controller
         }

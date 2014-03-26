@@ -33,12 +33,13 @@ class Subjects extends MY_Controller {
         {
             for ($x = 0; $x < count($unit)-1; $x++)
             {
-                if ($unit[$x]->rate_status['percentage'] < $unit[$x+1]->rate_status['percentage'])
+                if ($unit[$x]->rate_status['positive'] < $unit[$x+1]->rate_status['positive'])
                 {
                     $temp = $unit[$x];
                     $unit[$x] = $unit[$x+1];
                     $unit[$x+1] = $temp;
                 }
+               
             }
         }
         return $unit;
