@@ -18,11 +18,11 @@ class Home extends MY_Controller {
             }
         }
         
-        if (empty($this->user->Data('user_name'))) {
-            $page->Data('has_username', false);
-        } else {
-            $page->Data('has_username', true);
-        }
+//        if (empty($this->user->Data('user_name'))) {
+//            $page->Data('has_username', false);
+//        } else {
+//            $page->Data('has_username', true);
+//        }
 
         $page->Data('series', $this->series_m->get_all_series());
         $page->Data('units', $this->units_m->get_all_units());
