@@ -12,6 +12,7 @@
 	<meta name="description" content="<?php echo (isset($description))?$description:""; ?>">
 	<meta name="viewport" content="width=1024" >
 <!--	<link rel="shortcut icon" href="<?php echo base_url('_/images/favicon.ico'); ?>" />-->
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,800' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="<?php echo base_url(); ?>_/css/style.css">
 	<?php
 
