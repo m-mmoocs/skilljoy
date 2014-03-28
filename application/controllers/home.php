@@ -18,8 +18,7 @@ class Home extends MY_Controller {
             }
         }
         
-        $username = $this->user->Data('user_name');
-        if (empty($username)) {
+        if (!$this->user->Data('user_name')) {
             $page->Data('has_username', false);
         } else {
             $page->Data('has_username', true);
