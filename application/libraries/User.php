@@ -7,7 +7,7 @@ class User{
 	//getter / setters
 	 public function Data(){ //args(array) or Data(key, value);
 	 	if(func_num_args()==0) return $this->data;
-		else if(func_num_args()==1) { $t=func_get_arg(0); return $this->data[$t];}
+		else if(func_num_args()==1) { $t=func_get_arg(0); return isset($this->data[$t])?$this->data[$t]:false;}
 		else if(func_num_args()==2) $this->data[func_get_arg(0)]=func_get_arg(1);
 	 }
 	 
