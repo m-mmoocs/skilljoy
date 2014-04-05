@@ -18,8 +18,6 @@ class Mui {
                 return array('content' => $output, 'content_type' => 3);
             } else if ($output = $this->is_valid_youtube($input)) {    // returns extracted video code if it's valid youtube
                 return array('content' => $output, 'content_type' => 1);
-            } else if ($output = $this->is_valid_slideshare($input)) {
-                return array('content' => $output, 'content_type' => 5);
             } else {
                 return array('content' => $input, 'content_type' => 4); // flag as URL, but not a recognized type
             }
@@ -66,36 +64,5 @@ class Mui {
             return FALSE;
         }
     }
-    
-    function is_valid_slideshare($input)
-    {
-        if (preg_match('#(http://www.slideshare.net/+)#i', $input)) {   // if it starts with slideshare.net
-            $url = "http://www.slideshare.net/api/oembed/2?url=".$input."&format=json";
-            if($this->get_http_response_code($url) != "404"){       // if server doesn't give a 404 response
-                $response = file_get_contents($url);
-                $decode = json_decode($response);
-                if (isset($decode->html)) {         // extracts just the html code with links
-                    return $decode->html;
-                } else {
-                    return FALSE;
-                }
-            }
-            else
-            {
-                return FALSE;
-            }
-        } else {
-            return FALSE;
-        }
-    }
-    
-    function is_alphanumeric($input)
-    {
-        return ( ! preg_match("/^([-a-z0-9_])+$/i", $input)) ? FALSE : TRUE;
-    }
-    
-    function get_http_response_code($url){
-        $headers = get_headers($url);
-        return substr($headers[0], 9, 3);
-    }
+
 }
